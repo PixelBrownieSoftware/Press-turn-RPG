@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7168b987b479def498ebbfafbe7fb4e7, type: 3}
+  m_Name: Looney
+  m_EditorClassIdentifier: 
+  baseStats:
+    strength: 3
+    vitality: 2
+    agility: 1
+    magicPow: 1
+    luck: 2
+  baseHealth:
+    health: 20
+    maxHealth: 20
+    stamina: 5
+    maxStamina: 5
+  minStatIncrease:
+    strength: 1
+    vitality: 2
+    agility: 1
+    magicPow: 1
+    luck: 1
+  minHealthIncrease:
+    health: 0
+    maxHealth: 0
+    stamina: 0
+    maxStamina: 0
+  maxStatIncrease:
+    strength: 0
+    vitality: 0
+    agility: 0
+    magicPow: 0
+    luck: 0
+  maxHealthIncrease:
+    health: 0
+    maxHealth: 0
+    stamina: 0
+    maxStamina: 0
+  moves: []

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "New character", menuName = "BC Setter")]
 public class S_BattleCharacterSetter : ScriptableObject
 {
     public S_Stats baseStats;
