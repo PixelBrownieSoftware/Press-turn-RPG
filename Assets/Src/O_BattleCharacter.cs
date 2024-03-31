@@ -23,6 +23,7 @@ public class O_BattleCharacter
     public int level;
     public List<S_Move> extraSkills = new List<S_Move>();
     public S_BattleCharacterSetter baseCharacterData;
+    public Vector2 postion;
 
     public void Damage(int dmg) {
         characterHealth.health -= dmg;

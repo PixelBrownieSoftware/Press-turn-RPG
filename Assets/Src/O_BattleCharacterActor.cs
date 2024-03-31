@@ -5,13 +5,13 @@ using UnityEngine;
 public class O_BattleCharacterActor : MonoBehaviour
 {
     public O_BattleCharacter battleCharacter;
-    void Start()
-    {
-        
-    }
+
+    //TODO:
+    //Write an event which corresponds with stuff like OnHurt to do animations
 
     void Update()
     {
-        
+        if(battleCharacter != null)
+            battleCharacter.postion = transform.position;
     }
 }

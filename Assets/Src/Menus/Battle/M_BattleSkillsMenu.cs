@@ -59,58 +59,59 @@ public class M_BattleSkillsMenu : S_MenuSystem
         base.StartMenu();
         List<S_Move> moves = null;
 
+        moves = movesList.moveListRef;
+        if (moves.Count > 0)
+        {
+            for (int i = 0; i < moves.Count; i++)
+            {
+                var button = buttons[i];
+                button.SetButonText(moves[i].name);
+                string strCost = "";
+                int cost = 0;
+                if (moves[i].cost.stamina > 0)
+                {
+                    cost = moves[i].cost.stamina;
+                    strCost = cost + " SP";
+                }
+                else
+                {
+                    /*
+                        cost = s_calculation.DetermineHPCost(moves[i], currentCharacter.characterRef.strengthNet, 
+                            currentCharacter.characterRef.vitalityNet,
+                            currentCharacter.characterRef.maxHealth);
+                        strCost = cost + " HP";
+                    */
+                }
+
+                bool canUse = true;
+                canUse = currentCharacter.battleCharacter.characterHealth.stamina >= cost;
+                /*
+                if (moves[i].element.isMagic)
+                        canUse = currentCharacter.battleCharacter.stamina >= cost;
+                    else
+                        canUse = currentCharacter.battleCharacter.health > cost;
+                */
+                if (!canUse)
+                {
+                    button.SetButtonColour(Color.grey);
+                    button.SetButonTextColour(Color.grey);
+                    button.SetBattleButton(moves[i], strCost);
+                    button.move = null;
+                }
+                else
+                {
+                    button.SetButtonColour(Color.white);
+                    button.SetButonTextColour(Color.white);
+                    button.SetBattleButton(moves[i], strCost);
+                }
+                button.gameObject.SetActive(true);
+            }
+        }
+        /*
         switch (battleMenuType.text)
         {
 
             case "Skills":
-                moves = movesList.moveListRef;
-                if (moves.Count > 0)
-                {
-                    for (int i = 0; i < moves.Count; i++)
-                    {
-                        var button = buttons[i];
-                        button.SetButonText(moves[i].name);
-                        string strCost = "";
-                        int cost = 0;
-                        if (moves[i].cost.stamina > 0)
-                        {
-                            cost = moves[i].cost.stamina;
-                            strCost = cost + " SP";
-                        }
-                        else
-                        {
-                            /*
-                                cost = s_calculation.DetermineHPCost(moves[i], currentCharacter.characterRef.strengthNet, 
-                                    currentCharacter.characterRef.vitalityNet,
-                                    currentCharacter.characterRef.maxHealth);
-                                strCost = cost + " HP";
-                            */
-                        }
-
-                        bool canUse = true;
-                        canUse = currentCharacter.battleCharacter.characterHealth.stamina >= cost;
-                        /*
-                        if (moves[i].element.isMagic)
-                                canUse = currentCharacter.battleCharacter.stamina >= cost;
-                            else
-                                canUse = currentCharacter.battleCharacter.health > cost;
-                        */
-                        if (!canUse)
-                        {
-                            button.SetButtonColour(Color.grey);
-                            button.SetButonTextColour(Color.grey);
-                            button.SetBattleButton(moves[i], strCost);
-                            button.move = null;
-                        }
-                        else
-                        {
-                            button.SetButtonColour(Color.white);
-                            button.SetButonTextColour(Color.white);
-                            button.SetBattleButton(moves[i], strCost);
-                        }
-                        button.gameObject.SetActive(true);
-                    }
-                }
                 break;
             case "Items":
                 isItem.boolean = true;
@@ -129,5 +130,6 @@ public class M_BattleSkillsMenu : S_MenuSystem
                 }
                 break;
         }
+        */
     }
 }

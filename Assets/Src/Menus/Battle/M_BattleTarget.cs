@@ -9,7 +9,6 @@ public class M_BattleTarget : S_MenuSystem
     public R_Move moveRef;
     public R_BattleCharacter selectedCharacter;
     public B_BattleTarget[] buttons;
-    public R_Text targetMenuTo;
 
     public CH_BattleCharacter selectTargetFunction;
     public CH_Text switchMenu;
@@ -64,6 +63,7 @@ public class M_BattleTarget : S_MenuSystem
             tg.SetTargetButton(battleChar);
             tg.SetButonText(battleChar.name);
             tg.gameObject.SetActive(true);
+            tg.gameObject.transform.position = Camera.main.WorldToScreenPoint(battleChar.postion);
         }
     }
 

@@ -9,10 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: feeafb0976608d142b7627f3e28453f2, type: 3}
+  m_Script: {fileID: 11500000, guid: 584799f4821e40943951b44d2b15b979, type: 3}
   m_Name: Move database
   m_EditorClassIdentifier: 
-  moves:
+  description: 
+  _isReset: 0
+  moveListRef:
   - {fileID: 11400000, guid: 60c13322900f8fe46a98002ebe0e6936, type: 2}
   - {fileID: 11400000, guid: 756d565a2cf3a07459ad3ae684432722, type: 2}
   - {fileID: 11400000, guid: 6f2583fb9195601448370ab94a7e184c, type: 2}

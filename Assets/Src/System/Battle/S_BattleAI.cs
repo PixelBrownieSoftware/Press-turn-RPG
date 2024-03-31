@@ -1,18 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Search;
 using UnityEngine;
 
 public class S_BattleAI : MonoBehaviour
 {
     public S_BattleSystem battleSystem;
-    public O_BattleCharacter currentCharacter;
+    public R_BattleCharacter currentCharacter;
     [SerializeField]
     private R_Move currentMoveRef;
     [SerializeField]
+    private R_MoveList currentMoveListRef;
+    [SerializeField]
     private R_BattleCharacter selectedTargetRef;
     [SerializeField]
+    private R_BattleCharacterList selectedTargetsRef;
+    [SerializeField]
     private CH_Func ececuteBattleSystemFunction;
+    [SerializeField]
+    private CH_Func displayMoves;
+    [SerializeField]
+    private CH_Func displayTargets;
+    [SerializeField]
+    private CH_Func receiveAICall;
     List<S_AI_Ranking> rankingsAI = new List<S_AI_Ranking>();
 
     private struct S_AI_Ranking{
@@ -26,9 +37,19 @@ public class S_BattleAI : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        receiveAICall.OnFunctionEvent += AISystem;
+    }
+
+    private void OnDisable()
+    {
+        receiveAICall.OnFunctionEvent -= AISystem;
+    }
     public void SelectMove(S_Move move) {
         currentMoveRef.SetMove(move);
-        O_BattleCharacter[] targets = battleSystem.DisplayTargets();
+        displayTargets.RaiseEvent();
+        O_BattleCharacter[] targets = selectedTargetsRef.battleCharList.ToArray();
         foreach (var target in targets)
         {
             rankingsAI.Add(new S_AI_Ranking(
@@ -39,12 +60,11 @@ public class S_BattleAI : MonoBehaviour
         }
     }
 
-    public void AISystem(O_BattleCharacter character) {
-        currentCharacter = character;
+    public void AISystem() {
         rankingsAI.Clear();
         rankingsAI = new List<S_AI_Ranking>();
-        S_Move[] moves = battleSystem.DisplayMoves();
-        foreach (var move in moves) {
+        displayMoves.RaiseEvent();
+        foreach (var move in currentMoveListRef.moveListRef) {
             SelectMove(move);
         }
         S_AI_Ranking bestAction = rankingsAI.OrderByDescending(r => r.score).First();
