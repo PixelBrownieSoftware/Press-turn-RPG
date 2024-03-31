@@ -46,3 +46,5 @@ MonoBehaviour:
     stamina: 0
     maxStamina: 0
   moves: []
+  characterColour: {r: 0.990566, g: 0.25441486, b: 0.2009167, a: 1}
+  characterColour2: {r: 0.8113208, g: 0.10829957, b: 0, a: 1}
