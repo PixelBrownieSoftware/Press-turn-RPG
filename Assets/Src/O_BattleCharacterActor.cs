@@ -12,6 +12,6 @@ public class O_BattleCharacterActor : MonoBehaviour
     void Update()
     {
         if(battleCharacter != null)
-            battleCharacter.postion = transform.position;
+            battleCharacter.position = transform.position;
     }
 }

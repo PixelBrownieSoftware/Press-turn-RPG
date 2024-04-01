@@ -42,6 +42,143 @@ public class S_BattleProcessor : MonoBehaviour
         preformCH.OnFunctionEvent -= ExcectcuteTurnFunction;
     }
 
+
+    public IEnumerator PlayAttackAnimation(S_ActionAnim[] animations, O_BattleCharacter targ, O_BattleCharacter user)
+    {
+
+        Vector3 dir = new Vector2(0, 0);
+        Vector3 originalPos = new Vector2(0, 0);
+        Vector3 targPos = new Vector2(0, 0);
+        if (targ != null)
+            targPos = targ.position;
+        if (user != null)
+            originalPos = user.position;
+
+        if (animations.Length > 0)
+        {
+            foreach (S_ActionAnim an in animations)
+            {
+                float timer = 0;
+                switch (an.actionType)
+                {
+                    case S_ActionAnim.ACTION_TYPE.CHAR_ANIMATION:
+                        /*
+                        user.playAnimation.Invoke(an.name);
+
+                        if (an.time > 0)
+                        {
+                            while (timer < an.time)
+                            {
+                                timer += Time.deltaTime;
+                                yield return new WaitForSeconds(Time.deltaTime);
+                            }
+                        }
+                        else
+                        {
+                            while (timer < user.GetAnimHandlerState())
+                            {
+                                timer += Time.deltaTime;
+                                yield return new WaitForSeconds(Time.deltaTime);
+                            }
+                        }
+                        */
+                        break;
+
+                    case S_ActionAnim.ACTION_TYPE.ANIMATION:
+                        {
+                            /*
+                            Vector2 start = new Vector2(0, 0);
+                            switch (an.start)
+                            {
+                                case S_ActionAnim.MOTION.SELF:
+                                    start = user.position;
+                                    break;
+                                case S_ActionAnim.MOTION.TO_TARGET:
+                                    if (targ != null)
+                                        start = targ.position;
+                                    break;
+                            }
+                            hitObjType.Set(an.name);
+                            O_ProjectileAnim projectile = projectileSpawner.projectilePool.Get();
+                            StartCoroutine(PlayProjectileAnimation(projectile, start, start));
+                            if (an.time > 0)
+                            {
+                                while (timer < an.time)
+                                {
+                                    timer += Time.deltaTime;
+                                    yield return new WaitForSeconds(Time.deltaTime);
+                                }
+                            }
+                            else
+                            {
+                                while (timer < projectile.GetAnimHandlerState())
+                                {
+                                    timer += Time.deltaTime;
+                                    yield return new WaitForSeconds(Time.deltaTime);
+                                }
+                            }
+                            */
+                        }
+                        break;
+
+                    case S_ActionAnim.ACTION_TYPE.WAIT:
+                        yield return new WaitForSeconds(an.time);
+                        break;
+
+
+
+                    case S_ActionAnim.ACTION_TYPE.CALCULATION:
+                        yield return StartCoroutine(DamageAction(user, targ));
+                        break;
+
+                        /*
+                    case s_actionAnim.ACTION_TYPE.FADE_SCREEN:
+                        fadeFunc.Fade(an.endColour);
+                        yield return new WaitForSeconds(0.75f);
+                        break;
+                        */
+
+                    case S_ActionAnim.ACTION_TYPE.PROJECTILE:
+                        {
+                            Vector2 start = new Vector2(0, 0);
+                            Vector2 end = new Vector2(0, 0);
+
+                            switch (an.start)
+                            {
+                                case S_ActionAnim.MOTION.SELF:
+                                    start = user.position;
+                                    break;
+                                case S_ActionAnim.MOTION.TO_TARGET:
+                                    start = targ.position;
+                                    break;
+                            }
+
+                            switch (an.goal)
+                            {
+                                case S_ActionAnim.MOTION.SELF:
+                                    end = user.position;
+                                    break;
+                                case S_ActionAnim.MOTION.TO_TARGET:
+                                    end = targ.position;
+                                    break;
+                            }
+                            /*
+                            hitObjType.Set(an.name);
+                            O_ProjectileAnim projectile = projectileSpawner.projectilePool.Get();
+                            yield return StartCoroutine(PlayProjectileAnimation(projectile, start, end));
+                            */
+                        }
+                        break;
+                }
+                yield return new WaitForSeconds(0.05f);
+            }
+        }
+        else
+        {
+            yield return StartCoroutine(DamageAction(user, targ));
+        }
+    }
+
     public IEnumerator SpawnHitObject(int damage, Vector2 pos, O_BattleCharacter bc)
     {
         hitObjectDamage.Set(damage);
@@ -59,22 +196,25 @@ public class S_BattleProcessor : MonoBehaviour
         hitObjectSpawner.hitObjectPool.Get();
         yield return new WaitForSeconds(0.6f);
     }
+    public IEnumerator DamageAction(O_BattleCharacter currentCharacter, O_BattleCharacter targetCharacter) {
+
+        int damage = 0;
+        damage = S_Calculation.CalculateDamage(currentCharacter, targetCharacter, selectedMoveRef.move, null, 0);
+        targetCharacter.Damage(damage);
+
+        Debug.Log(currentCharacter.name + " dealt " + damage + " damage to " + targetCharacter.name);
+        yield return new WaitForSeconds(0.1f);
+        yield return StartCoroutine(SpawnHitObject(damage, targetCharacter.position, targetCharacter));
+    }
 
     public IEnumerator PreformAction()
     {
         O_BattleCharacter currentCharacter = currentCharacterRef.battleCharacter;
         O_BattleCharacter targetCharacter = selectedTargetCharacterRef.battleCharacter;
-        int damage = 0;
         bool playerTeam = false;
         switch (selectedMoveRef.move.targetScope)
         {
             case S_Move.TARGET_SCOPE.SINGLE:
-                damage = S_Calculation.CalculateDamage(currentCharacter, targetCharacter, selectedMoveRef.move, null, 0);
-                targetCharacter.Damage(damage);
-
-                Debug.Log(currentCharacter.name + " dealt " + damage + " damage to " + targetCharacter.name);
-                yield return new WaitForSeconds(0.1f);
-                yield return StartCoroutine(SpawnHitObject(damage, targetCharacter.postion, targetCharacter));
                 break;
 
             case S_Move.TARGET_SCOPE.ALL:
@@ -84,10 +224,9 @@ public class S_BattleProcessor : MonoBehaviour
                     for (int i = 0; i < players.battleCharList.Count; i++)
                     {
                         O_BattleCharacter bc = players.battleCharList[i];
-                        damage = S_Calculation.CalculateDamage(currentCharacter, bc, selectedMoveRef.move, null, 0);
-                        bc.Damage(damage);
-                        yield return new WaitForSeconds(0.1f);
-                        yield return StartCoroutine(SpawnHitObject(damage, bc.postion, bc));
+                        yield return StartCoroutine(DamageAction(currentCharacter, bc));
+
+
                     }
                 }
                 else
@@ -95,10 +234,7 @@ public class S_BattleProcessor : MonoBehaviour
                     for (int i = 0; i < enemies.battleCharList.Count; i++)
                     {
                         O_BattleCharacter bc = enemies.battleCharList[i];
-                        damage = S_Calculation.CalculateDamage(currentCharacter, bc, selectedMoveRef.move, null, 0);
-                        bc.Damage(damage);
-                        yield return new WaitForSeconds(0.1f);
-                        yield return StartCoroutine(SpawnHitObject(damage, bc.postion, bc));
+                        yield return StartCoroutine(DamageAction(currentCharacter, bc));
                     }
                 }
                 break;
@@ -117,10 +253,7 @@ public class S_BattleProcessor : MonoBehaviour
                     for (int i = leftmostPos; i < rightmostPos; i++)
                     {
                         O_BattleCharacter bc = players.battleCharList[i];
-                        damage = S_Calculation.CalculateDamage(currentCharacter, bc, selectedMoveRef.move, null, 0);
-                        targetCharacter.Damage(damage);
-                        yield return new WaitForSeconds(0.1f);
-                        yield return StartCoroutine(SpawnHitObject(damage, bc.postion, bc));
+                        yield return StartCoroutine(DamageAction(currentCharacter, bc));
                     }
                 }
                 else
@@ -128,10 +261,7 @@ public class S_BattleProcessor : MonoBehaviour
                     for (int i = leftmostPos; i < rightmostPos; i++)
                     {
                         O_BattleCharacter bc = enemies.battleCharList[i];
-                        damage = S_Calculation.CalculateDamage(currentCharacter, bc, selectedMoveRef.move, null, 0);
-                        targetCharacter.Damage(damage);
-                        yield return new WaitForSeconds(0.1f);
-                        yield return StartCoroutine(SpawnHitObject(damage, bc.postion, bc));
+                        yield return StartCoroutine(DamageAction(currentCharacter, bc));
                     }
                 }
                 break;

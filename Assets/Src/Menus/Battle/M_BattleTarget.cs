@@ -63,7 +63,7 @@ public class M_BattleTarget : S_MenuSystem
             tg.SetTargetButton(battleChar);
             tg.SetButonText(battleChar.name);
             tg.gameObject.SetActive(true);
-            tg.gameObject.transform.position = Camera.main.WorldToScreenPoint(battleChar.postion);
+            tg.gameObject.transform.position = Camera.main.WorldToScreenPoint(battleChar.position);
         }
     }
 

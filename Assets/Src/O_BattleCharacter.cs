@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Playables;
 using UnityEngine;
+using UnityEngine.Events;
 
 [System.Serializable]
 public class O_BattleCharacter
@@ -23,7 +24,8 @@ public class O_BattleCharacter
     public int level;
     public List<S_Move> extraSkills = new List<S_Move>();
     public S_BattleCharacterSetter baseCharacterData;
-    public Vector2 postion;
+    public Vector2 position;
+    public UnityAction<string> playAnimation;
 
     public void Damage(int dmg) {
         characterHealth.health -= dmg;
