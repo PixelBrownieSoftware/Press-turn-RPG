@@ -7,7 +7,7 @@ public class M_CharacterExtraPassives : S_MenuSystem
 {
     /*
     [SerializeField]
-    private R_Passives availibleSkills;
+    private R_PassivesList availiblePassives;
     [SerializeField]
     private R_BattleCharacter currentCharacter;
     [SerializeField]
@@ -45,7 +45,7 @@ public class M_CharacterExtraPassives : S_MenuSystem
     {
         if (i == 1)
         {
-            if (availibleButtons.Length * (page + 1) < availibleSkills.passives.Count)
+            if (availibleButtons.Length * (page + 1) < availiblePassives.passiveListRef.Count)
             {
                 page++;
                 UpdateButtons();
@@ -65,18 +65,18 @@ public class M_CharacterExtraPassives : S_MenuSystem
         equip.OnFunctionEvent += EquipSkill;
         deEquip.OnFunctionEvent += UnequipSkill;
         equipSelect.OnFunctionEvent += GetAvailibleSkill;
-        deEquipSelect.OnFunctionEvent += GetEquippedSkill;
+        //deEquipSelect.OnFunctionEvent += GetEquippedSkill;
     }
     private void OnDisable()
     {
         equip.OnFunctionEvent -= EquipSkill;
         deEquip.OnFunctionEvent -= UnequipSkill;
         equipSelect.OnFunctionEvent -= GetAvailibleSkill;
-        deEquipSelect.OnFunctionEvent -= GetEquippedSkill;
+        //deEquipSelect.OnFunctionEvent -= GetEquippedSkill;
     }
     public void GetAvailibleSkill(int i)
     {
-        moveDescription.text = "" + availibleSkills.GetPassive(i).name;
+        moveDescription.text = "" + availiblePassives.GetPassive(i).name;
 
         equipButton.gameObject.SetActive(true);
         unequipButton.gameObject.SetActive(false);
@@ -85,7 +85,7 @@ public class M_CharacterExtraPassives : S_MenuSystem
     public void GetEquippedSkill(int i)
     {
         o_battleCharPartyData bcDat = currentCharacter.battleCharacter;
-        s_move extraSkill = currentCharacter.battleCharacter.extraSkills[i];
+        S_Move extraSkill = currentCharacter.battleCharacter.extraSkills[i];
 
         bool strReqFufil = bcDat.strength >= extraSkill.strReq;
         bool vitReqFufil = bcDat.vitality >= extraSkill.vitReq;
@@ -145,7 +145,7 @@ public class M_CharacterExtraPassives : S_MenuSystem
             return;
         unequipButton.gameObject.SetActive(true);
         equipButton.gameObject.SetActive(false);
-        currentCharacter.battleCharacter.extraPassives.Add(availibleSkills.GetPassive(i));
+        currentCharacter.battleCharacter.extraPassives.Add(availiblePassives.GetPassive(i));
         UpdateButtons();
     }
     public void UnequipSkill(int i)
@@ -162,15 +162,15 @@ public class M_CharacterExtraPassives : S_MenuSystem
         for (int i = 0; i < availibleButtons.Length; i++)
         {
             int index = i + (availibleButtons.Length * page);
-            if (availibleSkills.passives == null)
+            if (availiblePassives.passiveListRef == null)
             {
                 availibleButtons[i].gameObject.SetActive(false);
             }
             else
             {
-                if (availibleSkills.passives.Count > index)
+                if (availiblePassives.passiveListRef.Count > index)
                 {
-                    S_Passive skill = availibleSkills.passives[index];
+                    S_Passive skill = availiblePassives.passiveListRef[index];
                     if (!currentCharacter.battleCharacter.extraPassives.Contains(skill))
                     {
                         availibleButtons[indButton].gameObject.SetActive(true);

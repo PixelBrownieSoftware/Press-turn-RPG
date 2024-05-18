@@ -16,6 +16,7 @@ MonoBehaviour:
     strength: 3
     vitality: 4
     agility: 1
+    dexterity: 0
     magicPow: 3
     luck: 2
   baseHealth:
@@ -23,28 +24,27 @@ MonoBehaviour:
     maxHealth: 23
     stamina: 0
     maxStamina: 17
-  minStatIncrease:
-    strength: 1
-    vitality: 1
-    agility: 1
-    magicPow: 1
-    luck: 1
   minHealthIncrease:
-    health: 0
-    maxHealth: 0
+    health: 1
+    maxHealth: 1
     stamina: 0
-    maxStamina: 0
-  maxStatIncrease:
-    strength: 0
-    vitality: 0
-    agility: 0
-    magicPow: 0
-    luck: 0
+    maxStamina: 1
+  levelsStatIncrease:
+    strength: 4
+    vitality: 4
+    agility: 4
+    dexterity: 4
+    magicPow: 4
+    luck: 4
   maxHealthIncrease:
     health: 0
-    maxHealth: 0
+    maxHealth: 1
     stamina: 0
-    maxStamina: 0
-  moves: []
+    maxStamina: 1
+  movesToLearn:
+  - {fileID: 11400000, guid: 756d565a2cf3a07459ad3ae684432722, type: 2}
+  passivesToLearn: []
   characterColour: {r: 0.990566, g: 0.25441486, b: 0.2009167, a: 1}
   characterColour2: {r: 0.8113208, g: 0.10829957, b: 0, a: 1}
+  defaultAffinities: []
+  characterBehaviour: {fileID: 0}

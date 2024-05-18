@@ -6,8 +6,9 @@ public class B_SceneTrans : O_Button
 {
     public CH_MapTransfer transfer;
     public string scene;
-    public void OnClickEvent()
+    public override void OnClickEvent()
     {
+        base.OnClickEvent();
         transfer.RaiseEvent(scene);
     }
 }

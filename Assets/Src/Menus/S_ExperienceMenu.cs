@@ -23,13 +23,13 @@ public class S_ExperienceMenu : S_MenuSystem
 
     private void OnEnable()
     {
-        continueButtonFunc.OnFunctionEvent += SetbattleStatsAfterExp;
+        //continueButtonFunc.OnFunctionEvent += SetbattleStatsAfterExp;
         overworldButtonFunc.OnFunctionEvent += SwtichToOverworld;
     }
 
     private void OnDisable()
     {
-        continueButtonFunc.OnFunctionEvent -= SetbattleStatsAfterExp;
+        //continueButtonFunc.OnFunctionEvent -= SetbattleStatsAfterExp;
         overworldButtonFunc.OnFunctionEvent -= SwtichToOverworld;
     }
 

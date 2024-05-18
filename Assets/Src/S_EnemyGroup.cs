@@ -30,10 +30,10 @@ public class s_battleEvent
 */
 
 [CreateAssetMenu(fileName = "New enemy group", menuName = "Battle group")]
-public class S_EnemyGroup : ScriptableObject
+public class S_BattleGroup : ScriptableObject
 {
     [System.Serializable]
-    public class s_groupMember{
+    public class S_GroupMember{
         public S_BattleCharacterSetter memberDat;
         public enum LEVEL_TYPE {
             RANDOM,
@@ -43,22 +43,20 @@ public class S_EnemyGroup : ScriptableObject
         public int level;
         public int maxLevel;
         public S_Move[] extraSkills;
-        //public S_Passive[] passives;
+        public S_Passive[] extraPassives;
         //public charAI[] extraSkillsAI;
     }
     public bool fleeable = true;
     public bool tempOnly = false;
-    public bool guestInvolved = false;
-    public s_groupMember[] members;
-    public s_groupMember[] members_summonable;
-    public s_groupMember[] members_pre_summon;
-    public s_groupMember[] members_Player;
-    public s_groupMember member_Guest;
+    public S_GroupMember[] members_Enemy;
+    public S_GroupMember[] members_Player;
+    //public S_GroupMember[] members_summonable;
+    //public S_GroupMember[] members_pre_summon;
 
     public S_BattleCharacterSetter[] unlockCharacters;
 
-    public S_EnemyGroup[] branches;
-    public S_EnemyGroup[] perishBranches;
+    public S_BattleGroup[] branches;
+    public S_BattleGroup[] perishBranches;
     public Shop_item[] shopItems;
 
     public Sprite bg1;

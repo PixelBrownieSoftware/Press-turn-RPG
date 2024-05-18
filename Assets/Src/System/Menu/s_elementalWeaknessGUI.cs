@@ -5,24 +5,23 @@ using UnityEngine.UI;
 
 public class s_elementalWeaknessGUI : MonoBehaviour
 {
-    /*
     public Image weakImg;
     public Text weakTXT;
     public Text weakTXTShadow;
-    o_battleCharPartyData bcD;
+    O_BattleCharacter bcD;
     public S_Element el;
 
     public Color normal;
-    public Color frail;
+    public Color weak;
     public Color voidDMG;
     public Color resist;
     public Color absorb;
     public Color reflect;
     float elementWeakness;
-    ELEMENT_WEAKNESS aff;
+    TURN_FLAG aff;
     public R_BattleCharacter currentCharacter;
     public CH_Func setData;
-    public S_EnemyWeaknessReveal revealAffinity;
+    //public S_EnemyWeaknessReveal revealAffinity;
     bool showAffinity = true;
 
     private void OnEnable()
@@ -39,21 +38,23 @@ public class s_elementalWeaknessGUI : MonoBehaviour
         showAffinity = true;
         bcD = currentCharacter.battleCharacter;
         elementWeakness = bcD.GetElementWeakness(el);
+        /*
         if (revealAffinity != null) {
             showAffinity = revealAffinity.EnemyWeaknessExists(bcD.characterDataSource, el);
         }
+        */
         if (showAffinity)
         {
             if (elementWeakness >= 2)
-                aff = ELEMENT_WEAKNESS.FRAIL;
+                aff = TURN_FLAG.WEAK;
             else if (elementWeakness < 2 && elementWeakness > 0)
-                aff = ELEMENT_WEAKNESS.NONE;
+                aff = TURN_FLAG.NORMAL;
             else if (elementWeakness == 0)
-                aff = ELEMENT_WEAKNESS.NULL;
+                aff = TURN_FLAG.NULL;
             else if (elementWeakness < 0 && elementWeakness > -1)
-                aff = ELEMENT_WEAKNESS.REFLECT;
+                aff = TURN_FLAG.REPEL;
             else if (elementWeakness <= -1)
-                aff = ELEMENT_WEAKNESS.ABSORB;
+                aff = TURN_FLAG.ABSORB;
         }
     }
 
@@ -65,27 +66,27 @@ public class s_elementalWeaknessGUI : MonoBehaviour
             {
                 switch (aff)
                 {
-                    case ELEMENT_WEAKNESS.FRAIL:
-                        weakTXT.text = "Frail";
-                        weakImg.color = frail;
+                    case TURN_FLAG.WEAK:
+                        weakTXT.text = "Weak";
+                        weakImg.color = weak;
                         break;
 
-                    case ELEMENT_WEAKNESS.NONE:
+                    case TURN_FLAG.NORMAL:
                         weakTXT.text = "";
                         weakImg.color = normal;
                         break;
 
-                    case ELEMENT_WEAKNESS.ABSORB:
-                        weakTXT.text = "Abs";
+                    case TURN_FLAG.ABSORB:
+                        weakTXT.text = "Abs";   
                         weakImg.color = absorb;
                         break;
 
-                    case ELEMENT_WEAKNESS.REFLECT:
+                    case TURN_FLAG.REPEL:
                         weakTXT.text = "Ref";
                         weakImg.color = reflect;
                         break;
 
-                    case ELEMENT_WEAKNESS.NULL:
+                    case TURN_FLAG.NULL:
                         weakTXT.text = "Void";
                         weakImg.color = voidDMG;
                         break;
@@ -99,5 +100,4 @@ public class s_elementalWeaknessGUI : MonoBehaviour
             weakTXTShadow.text = weakTXT.text;
         }
     }
-    */
 }

@@ -13,5 +13,221 @@ MonoBehaviour:
   m_Name: Party members
   m_EditorClassIdentifier: 
   description: 
-  _isReset: 0
-  battleCharList: []
+  _isReset: 1
+  battleCharList:
+  - name: Redler
+    characterStats:
+      strength: 3
+      vitality: 4
+      agility: 1
+      dexterity: 0
+      magicPow: 3
+      luck: 2
+    statusStats:
+      strength: 0
+      vitality: 0
+      agility: 0
+      dexterity: 0
+      magicPow: 0
+      luck: 0
+    characterHealth:
+      health: 0
+      maxHealth: 0
+      stamina: 0
+      maxStamina: 0
+    experiencePoints: 0
+    level: 0
+    extraSkills: []
+    extraPassives: []
+    baseCharacterData: {fileID: 11400000, guid: 5b9906a04493f974884e60b12eb521ca, type: 2}
+    position: {x: 0, y: 0}
+    statusEffects: []
+  - name: Redler
+    characterStats:
+      strength: 3
+      vitality: 4
+      agility: 1
+      dexterity: 0
+      magicPow: 3
+      luck: 2
+    statusStats:
+      strength: 0
+      vitality: 0
+      agility: 0
+      dexterity: 0
+      magicPow: 0
+      luck: 0
+    characterHealth:
+      health: 0
+      maxHealth: 0
+      stamina: 0
+      maxStamina: 0
+    experiencePoints: 0
+    level: 0
+    extraSkills: []
+    extraPassives: []
+    baseCharacterData: {fileID: 11400000, guid: 5b9906a04493f974884e60b12eb521ca, type: 2}
+    position: {x: 0, y: -35.7}
+    statusEffects: []
+  - name: Redler
+    characterStats:
+      strength: 3
+      vitality: 4
+      agility: 1
+      dexterity: 0
+      magicPow: 3
+      luck: 2
+    statusStats:
+      strength: 0
+      vitality: 0
+      agility: 0
+      dexterity: 0
+      magicPow: 0
+      luck: 0
+    characterHealth:
+      health: 0
+      maxHealth: 0
+      stamina: 0
+      maxStamina: 0
+    experiencePoints: 0
+    level: 0
+    extraSkills: []
+    extraPassives: []
+    baseCharacterData: {fileID: 11400000, guid: 5b9906a04493f974884e60b12eb521ca, type: 2}
+    position: {x: 0, y: -69.8}
+    statusEffects: []
+  - name: Redler
+    characterStats:
+      strength: 3
+      vitality: 4
+      agility: 1
+      dexterity: 0
+      magicPow: 3
+      luck: 2
+    statusStats:
+      strength: 0
+      vitality: 0
+      agility: 0
+      dexterity: 0
+      magicPow: 0
+      luck: 0
+    characterHealth:
+      health: 0
+      maxHealth: 0
+      stamina: 0
+      maxStamina: 0
+    experiencePoints: 0
+    level: 0
+    extraSkills: []
+    extraPassives: []
+    baseCharacterData: {fileID: 11400000, guid: 5b9906a04493f974884e60b12eb521ca, type: 2}
+    position: {x: 0, y: -113}
+    statusEffects: []
+  - name: Redler
+    characterStats:
+      strength: 3
+      vitality: 4
+      agility: 1
+      dexterity: 0
+      magicPow: 3
+      luck: 2
+    statusStats:
+      strength: 0
+      vitality: 0
+      agility: 0
+      dexterity: 0
+      magicPow: 0
+      luck: 0
+    characterHealth:
+      health: 0
+      maxHealth: 23
+      stamina: 17
+      maxStamina: 17
+    experiencePoints: 0
+    level: 0
+    extraSkills: []
+    extraPassives: []
+    baseCharacterData: {fileID: 11400000, guid: 5b9906a04493f974884e60b12eb521ca, type: 2}
+    position: {x: 0, y: -154.4}
+    statusEffects: []
+  - name: Redler
+    characterStats:
+      strength: 3
+      vitality: 4
+      agility: 1
+      dexterity: 0
+      magicPow: 3
+      luck: 2
+    statusStats:
+      strength: 0
+      vitality: 0
+      agility: 0
+      dexterity: 0
+      magicPow: 0
+      luck: 0
+    characterHealth:
+      health: 23
+      maxHealth: 23
+      stamina: 17
+      maxStamina: 17
+    experiencePoints: 0
+    level: 0
+    extraSkills: []
+    extraPassives: []
+    baseCharacterData: {fileID: 11400000, guid: 5b9906a04493f974884e60b12eb521ca, type: 2}
+    position: {x: 0, y: 0}
+    statusEffects: []
+  - name: Redler
+    characterStats:
+      strength: 3
+      vitality: 4
+      agility: 1
+      dexterity: 0
+      magicPow: 3
+      luck: 2
+    statusStats:
+      strength: 0
+      vitality: 0
+      agility: 0
+      dexterity: 0
+      magicPow: 0
+      luck: 0
+    characterHealth:
+      health: 23
+      maxHealth: 24
+      stamina: 17
+      maxStamina: 17
+    experiencePoints: 0
+    level: 0
+    extraSkills: []
+    extraPassives: []
+    baseCharacterData: {fileID: 11400000, guid: 5b9906a04493f974884e60b12eb521ca, type: 2}
+    position: {x: 0, y: 0}
+    statusEffects: []
+  - name: Redler
+    characterStats:
+      strength: 3
+      vitality: 4
+      agility: 1
+      dexterity: 0
+      magicPow: 3
+      luck: 2
+    statusStats:
+      strength: 0
+      vitality: 0
+      agility: 0
+      dexterity: 0
+      magicPow: 0
+      luck: 0
+    characterHealth:
+      health: 23
+      maxHealth: 24
+      stamina: 17
+      maxStamina: 17
+    experiencePoints: 0
+    level: 0
+    extraSkills: []
+    extraPassives: []
+    baseCharacterData: {fileID: 11400000, guid: 5b9906a04493f974884e60b12eb521ca, type: 2}
+    position: {x: 0, y: 0}
+    statusEffects: []

@@ -9,7 +9,9 @@ public class B_BattleMove: O_Button
     public CH_Move moveClickEvent;
     public TextMeshProUGUI tmp;
 
-    public void OnClickEvent() {
+    public override void OnClickEvent()
+    {
+        base.OnClickEvent();
         if (move != null)
             moveClickEvent.RaiseEvent(move);
     }

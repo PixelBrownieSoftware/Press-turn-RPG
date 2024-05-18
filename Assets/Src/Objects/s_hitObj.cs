@@ -47,13 +47,11 @@ public class s_hitObj : MonoBehaviour
         switch (damageType)
         {
             case "damage_player":
-                print(dmg);
                 text.text = "" + dmg;
                 hitObj.sprite = player_spr;
                 anim.Play("HitOBJ");
                 break;
             case "damage_enemy":
-                print(dmg);
                 text.text = "" + dmg;
                 hitObj.sprite = enemy_spr;
                 anim.Play("HitOBJ_enem");

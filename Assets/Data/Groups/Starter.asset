@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cd426313d9ea3348a46de7bd2ea2052, type: 3}
+  m_Name: Starter
+  m_EditorClassIdentifier: 
+  fleeable: 1
+  tempOnly: 0
+  members_Enemy: []
+  members_Player:
+  - memberDat: {fileID: 11400000, guid: 5b9906a04493f974884e60b12eb521ca, type: 2}
+    levType: 1
+    level: 1
+    maxLevel: 1
+    extraSkills: []
+    extraPassives: []
+  - memberDat: {fileID: 11400000, guid: ac7bee3c8fa60cb4998699e59becfb53, type: 2}
+    levType: 1
+    level: 5
+    maxLevel: 5
+    extraSkills: []
+    extraPassives: []
+  unlockCharacters: []
+  branches: []
+  perishBranches: []
+  shopItems: []
+  bg1: {fileID: 0}
+  bg2: {fileID: 0}
+  material1: {fileID: 0}
+  material2: {fileID: 0}

@@ -3,18 +3,78 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Move", menuName = "Move")]
-public class S_Move : S_Ability
+public class S_Move : ScriptableObject
 {
     public int power;
+    public float accuracy = 1f;  //Value exists between 0 - 1. If set to less than zero or more than 1, it will always connect
     public bool fixedValue = false;
     public bool targetDead = false;
+    public bool isHeal = false;
     public enum TARGET_SCOPE { SINGLE, ALL, AOE, RANDOM }
     public enum FACTION_SCOPE { FOES, ALLY, ALL }
     public TARGET_SCOPE targetScope = TARGET_SCOPE.SINGLE;
     public FACTION_SCOPE factionScope = FACTION_SCOPE.FOES;
     public S_Element element;
-    public S_Stats statRequirments;
-    public S_Stats_Util cost;
+    public int cost;
+    public S_ActionAnim[] animations;
+    public string customFunction;
+
+    public enum PASSIVE_TYPE
+    {
+        STAT_BOOST,
+        ELEMENT_DMG_BOOST,
+        RESIST,
+        NULL,
+        ABSORB,
+        REPEL,
+        SACRIFICE,
+        REGEN,
+        COUNTER,
+        CUSTOM
+    }
+    public enum PASSIVE_TRIGGER
+    {
+        ALWAYS,
+        SELF_HIT,
+        ALLY_HIT,
+        SELF_ALLY_HIT,
+        SELF_BEFORE_HIT,
+        ALLY_BEFORE_HIT,
+        SELF_DEFEAT,
+        ALLY_DEFEAT,
+        SELF_ALLY_DEFEAT
+    }
+    public enum STAT_TYPE
+    {
+        HEALTH,
+        STAMINA,
+        HP_SP
+    }
+
+    public bool isPassive = false;
+    public PASSIVE_TYPE passiveSkillType;
+    public PASSIVE_TRIGGER passiveTrigger;
+    public STAT_TYPE stat;
+    public S_Element passiveElement;
+    public float percentage;    //This will, for example override an affinity.
+    public float percentageHeal; //Health will be healed more than stamina
+
+    public S_Stats statReq;
+    public bool MeetsRequirements(O_BattleCharacter bc)
+    {
+        if (statReq <= bc.characterStats)
+            return true;
+        return false;
+    }
+
+    public bool MeetsRequirements(O_BattleCharacter bc, S_Element element)
+    {
+        int discount = 1//bc.characterDataSource.GetDiscounts[element] * -1
+            ;
+        if (statReq <= bc.characterStats + discount)
+            return true;
+        return false;
+    }
 }
 
 

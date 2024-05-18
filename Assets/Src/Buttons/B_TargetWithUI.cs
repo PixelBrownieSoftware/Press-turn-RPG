@@ -6,12 +6,21 @@ using UnityEngine;
 public class B_TargetWithUI : B_BattleTarget
 {
     public Slider health;
-    public bool isHP = true;
 
-    public new void SetTargetButton(O_BattleCharacter target) {
-        base.SetTargetButton(target);
-        float HPCompare = (float)((float)target.characterHealth.health / (float)target.characterHealth.maxHealth);
-        health.maxValue = 1f;
-        health.value = isHP ? HPCompare : (float)((float)target.characterHealth.stamina / (float)target.characterHealth.maxStamina);
+    public new void SetTargetButton(ref O_BattleCharacter target) {
+        base.SetTargetButton(ref target);
+    }
+
+    public void SetSliderBar() {
+        float HPCompare =((float)target.characterHealth.health / (float)target.characterHealth.maxHealth) * 100f;
+        health.maxValue = 100f;
+        health.value = HPCompare;
+    }
+
+    private void Update()
+    {
+        if (target != null) {
+            SetSliderBar();
+        }
     }
 }

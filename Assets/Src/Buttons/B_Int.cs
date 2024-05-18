@@ -7,8 +7,9 @@ public class B_Int : O_Button
     public int number;
     public CH_Int moveClickEvent;
 
-    public void OnClickEvent()
+    public override void OnClickEvent()
     {
+        base.OnClickEvent();
         moveClickEvent.RaiseEvent(number);
     }
 

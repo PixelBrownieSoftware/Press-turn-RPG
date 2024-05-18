@@ -12,6 +12,8 @@ public class S_MenuManager : MonoBehaviour
     [SerializeField]
     private CH_Func backMenuFucntion;
     private S_MenuSystem m_currentMenu;
+    [SerializeField]
+    private CH_Func onLoad;
 
     public string defaultMenu;
 
@@ -28,6 +30,7 @@ public class S_MenuManager : MonoBehaviour
         backMenuFucntion.OnFunctionEvent -= BackFunction;
         switchMenuFunction.OnTextEventRaised -= SwitchMenu;
     }
+
 
     private void Awake()
     {

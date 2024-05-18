@@ -16,6 +16,8 @@ public enum TURN_FLAG
 {
     NORMAL,
     WEAK,
+    CRITICAL,
+    MISS,
     NULL,
     REPEL,
     ABSORB
@@ -68,7 +70,6 @@ public class S_BattleSystem : MonoBehaviour
 
 
     public T_CreatePartyMembers testCreatorParty;
-    public S_BattleAI AI;
 
 
     private void Start()

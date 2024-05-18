@@ -33,7 +33,7 @@ public class M_CharacterStatus : S_MenuSystem
     {
         base.StartMenu();
         currentBattleCharacterData = characterData.battleCharacter;
-        assignElementalAffinities.RaiseEvent();
+        //assignElementalAffinities.RaiseEvent();
     }
 
     private void Update()

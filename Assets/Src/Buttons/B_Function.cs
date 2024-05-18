@@ -6,8 +6,9 @@ public class B_Function : O_Button
 {
     public CH_Func stringClickEvent;
 
-    public void OnClickEvent()
+    public override void OnClickEvent()
     {
+        base.OnClickEvent();
         stringClickEvent.RaiseEvent();
     }
 }

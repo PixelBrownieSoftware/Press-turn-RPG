@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d23126d3e1fd82a44a6fbb9da49ce7a6, type: 3}
+  m_Name: BattlecharacterPayload
+  m_EditorClassIdentifier: 
+  description: This is where the BattleCharacterFactory puts the character it created.
+    Whatever class calls it should take what is here.
+  _isReset: 0
+  battleCharacter:
+    name: Test Behaviour
+    characterStats:
+      strength: 4
+      vitality: 6
+      agility: 3
+      dexterity: 5
+      magicPow: 2
+      luck: 1
+    statusStats:
+      strength: 0
+      vitality: 0
+      agility: 0
+      dexterity: 0
+      magicPow: 0
+      luck: 0
+    characterHealth:
+      health: 999
+      maxHealth: 1004
+      stamina: 10
+      maxStamina: 15
+    experiencePoints: 0
+    level: 0
+    extraSkills: []
+    extraPassives: []
+    baseCharacterData: {fileID: 11400000, guid: ac7bee3c8fa60cb4998699e59becfb53, type: 2}
+    position: {x: 0, y: 0}
+    statusEffects: []

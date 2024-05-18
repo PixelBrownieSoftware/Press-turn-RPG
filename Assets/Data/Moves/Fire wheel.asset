@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e2c6987fbe4c0e43b812b27cb72f337, type: 3}
+  m_Name: Fire wheel
+  m_EditorClassIdentifier: 
+  statReq:
+    strength: 0
+    vitality: 0
+    agility: 0
+    dexterity: 0
+    magicPow: 0
+    luck: 0
+  power: 18
+  accuracy: 1
+  fixedValue: 0
+  targetDead: 0
+  targetScope: 0
+  factionScope: 0
+  element: {fileID: 11400000, guid: 93a64569bf0e7ec44980ff27f1f7f4c3, type: 2}
+  statRequirments:
+    strength: 0
+    vitality: 0
+    agility: 0
+    dexterity: 0
+    magicPow: 0
+    luck: 0
+  cost:
+    health: 0
+    maxHealth: 0
+    stamina: 2
+    maxStamina: 0
+  animations: []

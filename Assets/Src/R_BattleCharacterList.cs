@@ -36,6 +36,10 @@ public class R_BattleCharacterList : R_Default
     {
         battleCharList.Clear();
     }
+    public bool Contains(O_BattleCharacter bc)
+    {
+        return battleCharList.Find(x => x == bc) != null;
+    }
 
     public O_BattleCharacter Get(string chName)
     {

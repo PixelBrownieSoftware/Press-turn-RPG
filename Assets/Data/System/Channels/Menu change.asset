@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2c8dad252d7b5b43943c9bb47ccbce7, type: 3}
   m_Name: Menu change
   m_EditorClassIdentifier: 
-  description: 
+  description: This changes the menu based on name.

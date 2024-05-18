@@ -6,19 +6,19 @@ public class M_PartyStatus : S_MenuSystem
 {
     public R_BattleCharacterList players;
     public R_BattleCharacter selectedCharacter;
-    public CH_Int selected;
+    public CH_Int selectedCharacterChannel;
     public CH_Text changeMenu;
     public B_Int[] buttons;
     public string menuToGoTo;
 
     private void OnEnable()
     {
-        selected.OnFunctionEvent += SelectCharacter;
+        selectedCharacterChannel.OnFunctionEvent += SelectCharacter;
     }
 
     private void OnDisable()
     {
-        selected.OnFunctionEvent -= SelectCharacter;
+        selectedCharacterChannel.OnFunctionEvent -= SelectCharacter;
     }
 
 

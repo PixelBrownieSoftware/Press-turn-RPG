@@ -3,14 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 public static class S_Calculation {
-
-    public static int DetermineHPCost(S_Move move, int strength, int vitality, int maxHP) {
-        int strVit = strength + vitality;
-        float perc = strVit / ((maxHP/2) + strVit);
-        perc -= .5f;
-        return Mathf.RoundToInt(move.cost.health + (move.cost.health * perc));
-    }
-
     
     public static int CalculateDamage(O_BattleCharacter user, O_BattleCharacter target, S_Move move, List<float> modifiers, int randomVal)
     {
@@ -21,7 +13,7 @@ public static class S_Calculation {
         if (!move.fixedValue)
         {
             float multipler = 1f;
-            float elementals = 1;//user.referencePoint.characterData.GetElementWeakness(el);
+            float elementals = user.GetElementWeakness(el);
             if (elementals < 0 && elementals > -1)
                 multipler = (elementals * -1);
             else if (elementals <= -1)
@@ -39,9 +31,24 @@ public static class S_Calculation {
             float elementalDamage = el.stats.GetFloats(user.characterStats);
             Debug.Log(user.name + " stats: " + (move.power * elementalDamage) + " target vitality: " + target.characterStatsNet.vitality);
             dmg = (int)((move.power * elementalDamage / (float)target.characterStatsNet.vitality) * multipler);
+            dmg = Mathf.Abs(dmg);
         }
         else { dmg = move.power; }
         return dmg;
+    }
+
+    public static bool PredictStatChance(int userVal, int targVal, float connectMax)
+    {
+        userVal = Mathf.Clamp(userVal, 1, int.MaxValue);
+        targVal = Mathf.Clamp(targVal, 1, int.MaxValue);
+        int totalVal = userVal + targVal;
+        float userModify = (float)userVal + ((float)userVal * connectMax);
+        Debug.Log("User chance: " + userModify + " enemy chance: " + targVal);
+        float attackConnectChance = (userModify / (float)totalVal);
+        float gonnaHit = UnityEngine.Random.Range(0f, 1f);
+        if (gonnaHit > attackConnectChance)
+            return false;
+        return true;
     }
     /*
     public bool PredictStatChance(int userVal, int targVal, float connectMax) {

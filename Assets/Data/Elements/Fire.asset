@@ -17,4 +17,10 @@ MonoBehaviour:
     vitality: 0
     agility: 0
     magicPow: 1.5
+    dexterity: 0
     luck: 0
+  statusInflict:
+  - statusEffect: {fileID: 11400000, guid: 939ec93493c30254ebb31ba26ce4f778, type: 2}
+    chance: 0.4
+    add_remove: 1
+  elementColour: {r: 1, g: 0.23113209, b: 0.23113209, a: 1}

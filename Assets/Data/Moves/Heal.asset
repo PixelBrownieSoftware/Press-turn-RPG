@@ -16,15 +16,23 @@ MonoBehaviour:
     strength: 0
     vitality: 0
     agility: 0
+    dexterity: 0
     magicPow: 0
     luck: 0
   power: 5
-  cost: 2
-  fixed_value: 0
+  accuracy: 1
+  fixedValue: 0
+  targetDead: 0
+  isHeal: 1
+  targetScope: 0
+  factionScope: 1
   element: {fileID: 11400000, guid: 5482478a407c6b94fb62ca5d9a57291b, type: 2}
   statRequirments:
     strength: 0
     vitality: 0
     agility: 0
+    dexterity: 0
     magicPow: 0
     luck: 0
+  cost: 0
+  animations: []

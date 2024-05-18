@@ -51,16 +51,10 @@ public class S_BattleOptions : MonoBehaviour
         {
             moves.Add(mv);
         }
-        if (ch.baseCharacterData.moves != null)
+        List<S_Move> currentMoves = ch.getCurrentMoves;
+        if (currentMoves != null)
         {
-            foreach (S_Move mv in ch.baseCharacterData.moves)
-            {
-                moves.Add(mv);
-            }
-        }
-        foreach (S_Move mv in ch.extraSkills)
-        {
-            moves.Add(mv);
+            moves.AddRange(currentMoves);
         }
         return moves.ToArray();
     }

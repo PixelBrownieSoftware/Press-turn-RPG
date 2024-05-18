@@ -13,22 +13,20 @@ public class M_BattleMainMenu : S_MenuSystem
     [SerializeField]
     private R_MoveList currentMovesRef;
     [SerializeField]
-    private R_Move currentMoveRef;
+    private R_Move selectedMove;
     [SerializeField]
     private R_Items inventory;
     [SerializeField]
-    private R_EnemyGroup currentGroup;
+    private R_BattleGroup currentGroup;
+    [SerializeField]
+    private R_Int targetMode; //0 for move targeting, 1 for analalyse targeting
 
     public R_BattleCharacterList targetList;
     public R_BattleCharacterList players;
     public R_BattleCharacterList opponents;
 
-    public B_Function primaryAttackButton;
-    public B_Function secondaryAttackButton;
-    public B_Function teritaryAttackButton;
     public B_Function skillsButton;
     public B_Function guardButton;
-    public B_Function itemButton;
     public B_Function analyseButton;
     public B_Function passButton;
     public B_Function runButton;
@@ -66,71 +64,73 @@ public class M_BattleMainMenu : S_MenuSystem
     private CH_Func runFromBattle;
     [SerializeField]
     private CH_Func getMovesMenu;
+    [SerializeField]
+    private CH_Func excecuteDisplayTargetsChannel;
+    [SerializeField]
+    private CH_Func displayMoves;
 
     private void OnEnable()
     {
         goToSkills.OnFunctionEvent += GoToSkills;
+        goToAnalyse.OnFunctionEvent += GoToAnalysis;
         goToPass.OnFunctionEvent += PassAction;
-        goToGuard.OnFunctionEvent += GuardAction;
-        runFromBattle.OnFunctionEvent += RunFromBattle;
-        goToItems.OnFunctionEvent += GoToItems;
+        //goToGuard.OnFunctionEvent += GuardAction;
+        //runFromBattle.OnFunctionEvent += RunFromBattle;
     }
 
     private void OnDisable()
     {
         goToSkills.OnFunctionEvent -= GoToSkills;
+        goToAnalyse.OnFunctionEvent -= GoToAnalysis;
         goToPass.OnFunctionEvent -= PassAction;
-        goToGuard.OnFunctionEvent -= GuardAction;
-        runFromBattle.OnFunctionEvent -= RunFromBattle;
-        goToItems.OnFunctionEvent -= GoToItems;
+        //goToGuard.OnFunctionEvent -= GuardAction;
+        //runFromBattle.OnFunctionEvent -= RunFromBattle;
     }
 
     public void RunFromBattle()
     {
+        targetMode.Set(0);
         changeMenu.RaiseEvent("EMPTY");
+    }
+
+    public void GoToAnalysis() {
+        targetMode.Set(1);
+        selectedMove.SetMove(analyseMove);
+        excecuteDisplayTargetsChannel.RaiseEvent();
+        changeMenu.RaiseEvent("TargetMenu");
     }
 
     public void GoToSkills()
     {
-        battleMenuType.text = "Skills";
-        //menuText.text = "EMPTY";
-        getMovesMenu.OnFunctionEvent.Invoke();
-        changeMenu.RaiseEvent("BattleSkillsMenu");
-    }
-    public void GoToItems()
-    {
-        battleMenuType.text = "Items";
-        menuText.text = "EMPTY";
-        changeMenu.RaiseEvent("BattleSkillMenu");
+        targetMode.Set(0);
+        changeMenu.RaiseEvent("SkillsMenu");
     }
     public void GuardAction()
     {
-       // targetCharacterRef.SetCharacter(currentCharacter);
-        currentMoveRef.SetMove(guard);
+        targetMode.Set(0);
+        // targetCharacterRef.SetCharacter(currentCharacter);
+        selectedMove.SetMove(guard);
         performMove.RaiseEvent();
         menuText.text = "EMPTY";
         changeMenu.RaiseEvent("EMPTY");
     }
     public void PassAction()
     {
+        targetMode.Set(0);
         //targetCharacterRef.SetCharacter(currentCharacter.);
-        currentMoveRef.SetMove(pass);
+        selectedMove.SetMove(pass);
         performMove.RaiseEvent();
-        menuText.text = "EMPTY";
         changeMenu.RaiseEvent("EMPTY");
     }
 
     public override void StartMenu()
     {
+        targetMode.Set(0);
         currentCharacter = currentCharacterRef;
-        secondaryAttackButton.gameObject.SetActive(false);
-        teritaryAttackButton.gameObject.SetActive(false);
-        skillsButton.gameObject.SetActive(false);
-        itemButton.gameObject.SetActive(false);
+        skillsButton.gameObject.SetActive(true);
         runButton.gameObject.SetActive(false);
         base.StartMenu();
-        primaryAttackButton.gameObject.SetActive(true);
-        guardButton.gameObject.SetActive(true);
+        guardButton.gameObject.SetActive(false);
         passButton.gameObject.SetActive(true);
         analyseButton.gameObject.SetActive(true);
         /*
@@ -142,14 +142,10 @@ public class M_BattleMainMenu : S_MenuSystem
         {
             skillsButton.gameObject.SetActive(true);
         }
-        */
-        if (inventory.inventory.Count > 0)
-        {
-            itemButton.gameObject.SetActive(true);
-        }
         if (currentGroup.enemyGroup.fleeable)
         {
             runButton.gameObject.SetActive(true);
         }
+        */
     }
 }

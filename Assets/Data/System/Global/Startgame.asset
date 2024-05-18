@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Startgame
   m_EditorClassIdentifier: 
   description: 
-  _isReset: 0
-  boolean: 0
+  _isReset: 1
+  boolean: 1
   defaultBoolean: 0

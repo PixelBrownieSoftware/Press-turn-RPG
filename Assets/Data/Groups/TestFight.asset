@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cd426313d9ea3348a46de7bd2ea2052, type: 3}
+  m_Name: TestFight
+  m_EditorClassIdentifier: 
+  fleeable: 1
+  tempOnly: 0
+  members_Enemy:
+  - memberDat: {fileID: 11400000, guid: cc3e77e42947d9246bf8bdc131f61518, type: 2}
+    levType: 0
+    level: 1
+    maxLevel: 2
+    extraSkills: []
+    extraPassives: []
+  - memberDat: {fileID: 11400000, guid: cc3e77e42947d9246bf8bdc131f61518, type: 2}
+    levType: 0
+    level: 1
+    maxLevel: 2
+    extraSkills: []
+    extraPassives: []
+  members_Player: []
+  unlockCharacters: []
+  branches: []
+  perishBranches: []
+  shopItems: []
+  bg1: {fileID: 0}
+  bg2: {fileID: 0}
+  material1: {fileID: 0}
+  material2: {fileID: 0}

@@ -10,8 +10,8 @@ public class M_HubBattleSelect : S_MenuSystem
     [SerializeField]
     private CH_MapTransfer mapTransfer;
     public CH_Text menuChanger;
-    public R_EnemyGroupList groupList;
-    public R_EnemyGroup selectedGroup;
+    public R_BattleGroupList groupList;
+    public R_BattleGroup selectedGroup;
     public B_Int forwardButton;
     public B_Int backButton;
     int page = 0;
@@ -34,6 +34,8 @@ public class M_HubBattleSelect : S_MenuSystem
     {
         page = 0;
         backButton.gameObject.SetActive(false);
+        if(groupList.groupList.Count < buttons.Length)
+            forwardButton.gameObject.SetActive(false);
         base.StartMenu();
         ShowButtons();
     }
@@ -68,7 +70,7 @@ public class M_HubBattleSelect : S_MenuSystem
     public void SelectBattle(int selectBattle)
     {
         menuChanger.RaiseEvent("");
-        selectedGroup.enemyGroup = groupList.groupList[selectBattle];
-        mapTransfer.RaiseEvent("battle_scene");
+        selectedGroup.battleGroup = groupList.groupList[selectBattle];
+        mapTransfer.RaiseEvent("BattleScene");
     }
 }

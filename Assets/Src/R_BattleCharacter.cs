@@ -7,6 +7,14 @@ public class R_BattleCharacter : R_Default
 {
     public O_BattleCharacter battleCharacter;
 
+    private void OnEnable()
+    {
+        if(_isReset)
+        {
+            battleCharacter = null;
+        }
+    }
+
     public void SetCharacter(O_BattleCharacter bcD)
     {
         battleCharacter = bcD;

@@ -6,4 +6,14 @@ using UnityEngine;
 public class S_Element : ScriptableObject
 {
     public S_Stats_Float stats;
+    public S_StatusInflict[] statusInflict;
+    [System.Serializable]
+    public struct S_StatusInflict
+    {
+        public S_StatusEffect statusEffect;
+        public float chance;
+        public bool add_remove;
+    }
+    //For cosmetics
+    public Color elementColour = Color.white;
 }

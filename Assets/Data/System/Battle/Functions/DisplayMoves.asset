@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cd261ddb09ca4c4ba4a6c404c1b642a, type: 3}
   m_Name: DisplayMoves
   m_EditorClassIdentifier: 
-  description: 
+  description: This is what is called to have the BattleOptions class populate the
+    selected moves register.

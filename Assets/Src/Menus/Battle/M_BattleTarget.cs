@@ -7,6 +7,7 @@ public class M_BattleTarget : S_MenuSystem
 {
     public R_BattleCharacterList targetCharacters;
     public R_Move moveRef;
+    public R_Int targetMode; //0 for move targeting, 1 for analalyse targeting
     public R_BattleCharacter selectedCharacter;
     public B_BattleTarget[] buttons;
 
@@ -16,8 +17,15 @@ public class M_BattleTarget : S_MenuSystem
 
     public void SetTarget(O_BattleCharacter target) {
         selectedCharacter.SetCharacter(target);
-        performMove.RaiseEvent();
-        switchMenu.RaiseEvent("EMPTY");
+        if (targetMode.integer == 0)
+        {
+            performMove.RaiseEvent();
+            switchMenu.RaiseEvent("EMPTY");
+        }
+        else
+        {
+            switchMenu.RaiseEvent("StatusMenu");
+        }
         /*
         if (targetMenuTo.text != "CharacterStatus")
             performMove.RaiseEvent();
@@ -56,11 +64,11 @@ public class M_BattleTarget : S_MenuSystem
 
         for (int i = 0; i < targetCharacters.battleCharList.Count; i++)
         {
-            O_BattleCharacter battleChar = targetCharacters.GetIndex(i);
+            O_BattleCharacter battleChar = targetCharacters.battleCharList[i];
             var tg = buttons[i];
             //bool isStatus = mov.moveType == s_move.MOVE_TYPE.NONE;
 
-            tg.SetTargetButton(battleChar);
+            tg.SetTargetButton(ref battleChar);
             tg.SetButonText(battleChar.name);
             tg.gameObject.SetActive(true);
             tg.gameObject.transform.position = Camera.main.WorldToScreenPoint(battleChar.position);

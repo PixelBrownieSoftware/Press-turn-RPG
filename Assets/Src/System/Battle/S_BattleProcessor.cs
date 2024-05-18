@@ -24,6 +24,10 @@ public class S_BattleProcessor : MonoBehaviour
     private S_HitObjSpawner hitObjectSpawner;
 
     [SerializeField]
+    private R_Int finalPressTurnFlag;
+    [SerializeField]
+    private R_Int hitObjectPressTurnFlag;
+    [SerializeField]
     private R_Int hitObjectDamage;
     [SerializeField]
     private R_Colour hitObjectColour;
@@ -43,7 +47,7 @@ public class S_BattleProcessor : MonoBehaviour
     }
 
 
-    public IEnumerator PlayAttackAnimation(S_ActionAnim[] animations, O_BattleCharacter targ, O_BattleCharacter user)
+    public IEnumerator PlayAttackAnimation(O_BattleCharacter user, O_BattleCharacter targ)
     {
 
         Vector3 dir = new Vector2(0, 0);
@@ -53,12 +57,13 @@ public class S_BattleProcessor : MonoBehaviour
             targPos = targ.position;
         if (user != null)
             originalPos = user.position;
+        S_ActionAnim[] animations = selectedMoveRef.move.animations;
 
         if (animations.Length > 0)
         {
             foreach (S_ActionAnim an in animations)
             {
-                float timer = 0;
+                //float timer = 0;
                 switch (an.actionType)
                 {
                     case S_ActionAnim.ACTION_TYPE.CHAR_ANIMATION:
@@ -128,7 +133,7 @@ public class S_BattleProcessor : MonoBehaviour
 
 
                     case S_ActionAnim.ACTION_TYPE.CALCULATION:
-                        yield return StartCoroutine(DamageAction(user, targ));
+                        DamageCalculation(user, targ);
                         break;
 
                         /*
@@ -175,46 +180,127 @@ public class S_BattleProcessor : MonoBehaviour
         }
         else
         {
-            yield return StartCoroutine(DamageAction(user, targ));
+            DamageCalculation(user, targ);
         }
     }
 
-    public IEnumerator SpawnHitObject(int damage, Vector2 pos, O_BattleCharacter bc)
+    public IEnumerator SpawnHitObject(int damage, Vector2 pos, string hitObjType)
     {
-        hitObjectDamage.Set(damage);
-        if (players.Find(x => x == bc, bc))
-        {
-            hitObjectType.Set("damage_player");
-            hitObjectColour.Set(bc.baseCharacterData.characterColour);
-        }
-        else
-        {
-            hitObjectType.Set("damage_enemy");
-            hitObjectColour.Set(Color.white);
-        }
+        hitObjectType.Set(hitObjType);
+        hitObjectDamage.Set(Mathf.Abs(damage));
         hitObjectPosition.Set(pos);
         hitObjectSpawner.hitObjectPool.Get();
         yield return new WaitForSeconds(0.6f);
     }
-    public IEnumerator DamageAction(O_BattleCharacter currentCharacter, O_BattleCharacter targetCharacter) {
 
-        int damage = 0;
-        damage = S_Calculation.CalculateDamage(currentCharacter, targetCharacter, selectedMoveRef.move, null, 0);
-        targetCharacter.Damage(damage);
+    public void DamageCalculation(O_BattleCharacter currentCharacter, O_BattleCharacter targetCharacter) {
+        string hitObjDamageType = "";
+        if (!selectedMoveRef.move.isHeal)
+        {
+            float elementWeakness = targetCharacter.GetElementWeakness(selectedMoveRef.move.element);
+            List<float> modifiers = new List<float>();
+            if (elementWeakness >= 2)
+                hitObjectPressTurnFlag.Set((int)TURN_FLAG.WEAK);
+            else if (elementWeakness < 2 && elementWeakness > 0)
+                hitObjectPressTurnFlag.Set((int)TURN_FLAG.NORMAL);
+            else if (elementWeakness == 0)
+                hitObjectPressTurnFlag.Set((int)TURN_FLAG.NULL);
+            else if (elementWeakness < 0 && elementWeakness > -1)
+                hitObjectPressTurnFlag.Set((int)TURN_FLAG.REPEL);
+            else if (elementWeakness <= -1)
+                hitObjectPressTurnFlag.Set((int)TURN_FLAG.ABSORB);
 
-        Debug.Log(currentCharacter.name + " dealt " + damage + " damage to " + targetCharacter.name);
-        yield return new WaitForSeconds(0.1f);
-        yield return StartCoroutine(SpawnHitObject(damage, targetCharacter.position, targetCharacter));
+            if (elementWeakness > 0)
+            {
+                bool scoreCriticalHit = targetCharacter.IsCritical(selectedMoveRef.move);
+
+                if (scoreCriticalHit)
+                {
+                    hitObjectPressTurnFlag.Set((int)TURN_FLAG.CRITICAL);
+                    modifiers.Add(1.7f);
+                }
+            }
+            int damage = S_Calculation.CalculateDamage(currentCharacter, targetCharacter, selectedMoveRef.move, modifiers, 0);
+
+            bool willHit = S_Calculation.PredictStatChance(currentCharacter.dexterity, targetCharacter.agility, 0.65f);
+            if (!willHit)
+            {
+                hitObjectPressTurnFlag.Set((int)TURN_FLAG.MISS);
+            }
+            else
+            {
+                if (players.Contains(targetCharacter))
+                {
+                    hitObjDamageType = "damage_player";
+                    hitObjectColour.Set(targetCharacter.baseCharacterData.characterColour);
+                }
+                else
+                {
+                    hitObjDamageType = "damage_enemy";
+                    hitObjectColour.Set(Color.white);
+                }
+                targetCharacter.characterHealth.health += -damage;
+                S_Element.S_StatusInflict[] inflictStatus = selectedMoveRef.move.element.statusInflict;
+                if (inflictStatus != null)
+                {
+                    foreach (var statusInflict in inflictStatus)
+                    {
+                        if (statusInflict.add_remove)
+                        {
+                            float statusInflictChance = UnityEngine.Random.Range(0, 1f);
+                            if (statusInflictChance > statusInflict.chance)
+                            {
+                                targetCharacter.SetStatus(statusInflict.statusEffect);
+                            }
+                        }
+                        else
+                        {
+                            float statusRemoveChance = UnityEngine.Random.Range(0, 1f);
+                            if (statusRemoveChance > statusInflict.chance)
+                            {
+                                targetCharacter.RemoveStatus(statusInflict.statusEffect);
+                            }
+                        }
+                    }
+                }
+            }
+            if (finalPressTurnFlag.integer < hitObjectPressTurnFlag.integer)
+            {
+                int changedFlag = hitObjectPressTurnFlag.integer;
+                finalPressTurnFlag.integer = changedFlag;
+            }
+
+            Debug.Log(currentCharacter.name + " dealt " + damage + " damage to " + targetCharacter.name);
+            StartCoroutine(DamageAction(damage, targetCharacter.position, hitObjDamageType));
+        }
+        else
+        {
+            int damage = selectedMoveRef.move.power;
+            targetCharacter.characterHealth.health += damage;
+            targetCharacter.characterHealth.health = Mathf.Clamp(targetCharacter.characterHealth.health, 0, targetCharacter.characterHealth.maxHealth);
+            hitObjDamageType = "heal_hp";
+            Debug.Log(currentCharacter.name + " dealt " + damage + " damage to " + targetCharacter.name);
+            StartCoroutine(DamageAction(damage,targetCharacter.position, hitObjDamageType));
+        }
     }
+
+    private IEnumerator DamageAction(int damage, Vector2 position, string hitObjDamageType) {
+
+        yield return new WaitForSeconds(0.1f);
+        yield return StartCoroutine(SpawnHitObject(damage, position, hitObjDamageType));
+    }
+
 
     public IEnumerator PreformAction()
     {
         O_BattleCharacter currentCharacter = currentCharacterRef.battleCharacter;
         O_BattleCharacter targetCharacter = selectedTargetCharacterRef.battleCharacter;
         bool playerTeam = false;
+        Debug.Log(currentCharacter.name + " used " + selectedMoveRef.move.name + " on " + targetCharacter.name);
         switch (selectedMoveRef.move.targetScope)
         {
             case S_Move.TARGET_SCOPE.SINGLE:
+                yield return StartCoroutine(PlayAttackAnimation(currentCharacter, targetCharacter));
                 break;
 
             case S_Move.TARGET_SCOPE.ALL:
@@ -224,9 +310,7 @@ public class S_BattleProcessor : MonoBehaviour
                     for (int i = 0; i < players.battleCharList.Count; i++)
                     {
                         O_BattleCharacter bc = players.battleCharList[i];
-                        yield return StartCoroutine(DamageAction(currentCharacter, bc));
-
-
+                        yield return StartCoroutine(PlayAttackAnimation(currentCharacter, bc));
                     }
                 }
                 else
@@ -234,7 +318,7 @@ public class S_BattleProcessor : MonoBehaviour
                     for (int i = 0; i < enemies.battleCharList.Count; i++)
                     {
                         O_BattleCharacter bc = enemies.battleCharList[i];
-                        yield return StartCoroutine(DamageAction(currentCharacter, bc));
+                        yield return StartCoroutine(PlayAttackAnimation(currentCharacter, bc));
                     }
                 }
                 break;
@@ -253,7 +337,7 @@ public class S_BattleProcessor : MonoBehaviour
                     for (int i = leftmostPos; i < rightmostPos; i++)
                     {
                         O_BattleCharacter bc = players.battleCharList[i];
-                        yield return StartCoroutine(DamageAction(currentCharacter, bc));
+                        yield return StartCoroutine(PlayAttackAnimation(currentCharacter, bc));
                     }
                 }
                 else
@@ -261,12 +345,52 @@ public class S_BattleProcessor : MonoBehaviour
                     for (int i = leftmostPos; i < rightmostPos; i++)
                     {
                         O_BattleCharacter bc = enemies.battleCharList[i];
-                        yield return StartCoroutine(DamageAction(currentCharacter, bc));
+                        yield return StartCoroutine(PlayAttackAnimation(currentCharacter, bc));
                     }
                 }
                 break;
         }
         yield return new WaitForSeconds(0.1f);
+    }
+
+    public IEnumerator CheckForDamageStatusEffects()
+    {
+        string hitObjDamageType = "";
+        ///TODO: Make it so that there is a way that this regenerates/damages HP and SP
+        O_BattleCharacter currentCharacter = currentCharacterRef.battleCharacter;
+        yield return new WaitForSeconds(0.1f);
+        foreach (var status in currentCharacter.statusEffects)
+        {
+            int affect = status.status.statUtilAffect.health;
+            if (affect != 0)
+            {
+                if (status.status.statUtilRegen)
+                {
+                    hitObjDamageType = "damage_enemy";
+                    currentCharacter.characterHealth.health += affect;
+                    yield return StartCoroutine(SpawnHitObject(affect, currentCharacter.position, hitObjDamageType));
+                }
+                else
+                {
+                    currentCharacter.characterHealth.health -= affect;
+
+                    if (players.Contains(currentCharacter))
+                    {
+                        hitObjDamageType = "damage_player";
+                        hitObjectColour.Set(currentCharacter.baseCharacterData.characterColour);
+                    }
+                    else
+                    {
+                        hitObjDamageType = "damage_enemy";
+                        hitObjectColour.Set(Color.white);
+                    }
+                    yield return StartCoroutine(SpawnHitObject(affect, currentCharacter.position, hitObjDamageType));
+                }
+            }
+        }
+        currentCharacter.UpateStatusEffectDuration();
+        currentCharacter.UpdateStatusEffectBuffs();
+
     }
 
     public void ExcectcuteTurnFunction()
@@ -276,7 +400,19 @@ public class S_BattleProcessor : MonoBehaviour
 
     public IEnumerator ExcecuteTurn()
     {
-        yield return StartCoroutine(PreformAction());
+        switch (selectedMoveRef.move.customFunction) {
+            default:
+                yield return StartCoroutine(PreformAction());
+                break;
+            case "pass":
+                yield return new WaitForSeconds(0.1f);
+                hitObjectPressTurnFlag.Set((int)TURN_FLAG.WEAK);
+                finalPressTurnFlag.Set((int)TURN_FLAG.WEAK);
+                Debug.Log("Turn pass!");
+                break;
+        }
+        yield return StartCoroutine(CheckForDamageStatusEffects());
+
         turnHandler.RaiseEvent();
     }
 }

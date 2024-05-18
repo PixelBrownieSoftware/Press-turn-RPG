@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
+using UnityEditor.Search;
 
 public class M_BattleSkillsMenu : S_MenuSystem
 {
@@ -21,6 +22,8 @@ public class M_BattleSkillsMenu : S_MenuSystem
     private R_Text battleMenuType;
     [SerializeField]
     private CH_Func excecuteDisplayTargetsChannel;
+    [SerializeField]
+    private CH_Func displayMoves;
 
     public TextMeshProUGUI comboMoveDesc;
 
@@ -45,10 +48,9 @@ public class M_BattleSkillsMenu : S_MenuSystem
     public void SelectMove(S_Move move)
     {
         selectedMove.SetMove(move);
-        excecuteDisplayTargetsChannel.OnFunctionEvent.Invoke();
+        excecuteDisplayTargetsChannel.RaiseEvent();
         changeMenu.RaiseEvent("TargetMenu");
     }
-
 
     public override void StartMenu()
     {
@@ -57,6 +59,7 @@ public class M_BattleSkillsMenu : S_MenuSystem
             b.gameObject.SetActive(false);
         }
         base.StartMenu();
+        displayMoves.RaiseEvent();
         List<S_Move> moves = null;
 
         moves = movesList.moveListRef;
@@ -68,9 +71,9 @@ public class M_BattleSkillsMenu : S_MenuSystem
                 button.SetButonText(moves[i].name);
                 string strCost = "";
                 int cost = 0;
-                if (moves[i].cost.stamina > 0)
+                if (moves[i].cost > 0)
                 {
-                    cost = moves[i].cost.stamina;
+                    cost = moves[i].cost;
                     strCost = cost + " SP";
                 }
                 else

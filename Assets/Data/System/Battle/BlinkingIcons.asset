@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: BlinkingIcons
   m_EditorClassIdentifier: 
   description: 
-  _isReset: 0
-  integer: 2
+  _isReset: 1
+  integer: -1
   defaultInteger: 0

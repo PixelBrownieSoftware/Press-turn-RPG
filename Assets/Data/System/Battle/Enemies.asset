@@ -14,4 +14,85 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: The enemies that are present in battle.
   _isReset: 1
-  battleCharList: []
+  battleCharList:
+  - name: Test Behaviour 3
+    characterStats:
+      strength: 3
+      vitality: 1
+      agility: 2
+      dexterity: 2
+      magicPow: 3
+      luck: 4
+    statusStats:
+      strength: 0
+      vitality: 0
+      agility: 0
+      dexterity: 0
+      magicPow: 0
+      luck: 0
+    characterHealth:
+      health: 951
+      maxHealth: 999
+      stamina: 20
+      maxStamina: 20
+    experiencePoints: 0
+    level: 0
+    extraSkills: []
+    extraPassives: []
+    baseCharacterData: {fileID: 11400000, guid: ac7bee3c8fa60cb4998699e59becfb53, type: 2}
+    position: {x: 222.4, y: 11.2}
+    statusEffects: []
+  - name: Test Behaviour 5
+    characterStats:
+      strength: 1
+      vitality: 1
+      agility: 1
+      dexterity: 2
+      magicPow: 3
+      luck: 1
+    statusStats:
+      strength: 0
+      vitality: 0
+      agility: 0
+      dexterity: 0
+      magicPow: 0
+      luck: 0
+    characterHealth:
+      health: 999
+      maxHealth: 999
+      stamina: 20
+      maxStamina: 20
+    experiencePoints: 0
+    level: 0
+    extraSkills: []
+    extraPassives: []
+    baseCharacterData: {fileID: 11400000, guid: ac7bee3c8fa60cb4998699e59becfb53, type: 2}
+    position: {x: 222.4, y: -15.099999}
+    statusEffects: []
+  - name: Test Behaviour 13
+    characterStats:
+      strength: 4
+      vitality: 2
+      agility: 1
+      dexterity: 4
+      magicPow: 1
+      luck: 1
+    statusStats:
+      strength: 0
+      vitality: 0
+      agility: 0
+      dexterity: 0
+      magicPow: 0
+      luck: 0
+    characterHealth:
+      health: 999
+      maxHealth: 999
+      stamina: 20
+      maxStamina: 20
+    experiencePoints: 0
+    level: 0
+    extraSkills: []
+    extraPassives: []
+    baseCharacterData: {fileID: 11400000, guid: ac7bee3c8fa60cb4998699e59becfb53, type: 2}
+    position: {x: 222.4, y: -39.399998}
+    statusEffects: []

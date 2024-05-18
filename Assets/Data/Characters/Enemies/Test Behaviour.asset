@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7168b987b479def498ebbfafbe7fb4e7, type: 3}
+  m_Name: Test Behaviour
+  m_EditorClassIdentifier: 
+  baseStats:
+    strength: 4
+    vitality: 6
+    agility: 3
+    dexterity: 5
+    magicPow: 2
+    luck: 1
+  baseHealth:
+    health: 999
+    maxHealth: 999
+    stamina: 10
+    maxStamina: 10
+  minHealthIncrease:
+    health: 1
+    maxHealth: 1
+    stamina: 1
+    maxStamina: 1
+  levelsStatIncrease:
+    strength: 3
+    vitality: 3
+    agility: 3
+    dexterity: 3
+    magicPow: 3
+    luck: 3
+  maxHealthIncrease:
+    health: 1
+    maxHealth: 1
+    stamina: 1
+    maxStamina: 1
+  movesToLearn:
+  - {fileID: 11400000, guid: 756d565a2cf3a07459ad3ae684432722, type: 2}
+  - {fileID: 11400000, guid: 51f73af2e3bd57a4fad39539b252f6a8, type: 2}
+  - {fileID: 11400000, guid: 6f2583fb9195601448370ab94a7e184c, type: 2}
+  passivesToLearn: []
+  characterColour: {r: 0, g: 0.8818593, b: 1, a: 1}
+  characterColour2: {r: 1, g: 0.7028302, b: 0.9867906, a: 1}
+  defaultAffinities: []
+  characterBehaviour: {fileID: 11400000, guid: bcd22fee5a10a7c4f9d1117824b63fa0, type: 2}
