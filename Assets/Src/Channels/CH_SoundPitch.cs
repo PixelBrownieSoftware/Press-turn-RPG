@@ -12,6 +12,11 @@ public class CH_SoundPitch : SO_ChannelDefaut
         if (OnFunctionEvent != null)
             OnFunctionEvent.Invoke(_audio, _pitch);
     }
+    public void RaiseEvent(AudioClip _audio, float _pitchMin, float _pitchMax)
+    {
+        if (OnFunctionEvent != null)
+            OnFunctionEvent.Invoke(_audio, Random.Range(_pitchMin, _pitchMax));
+    }
     public void RaiseEvent(R_SoundEffect _audio)
     {
         if (OnFunctionEvent != null)

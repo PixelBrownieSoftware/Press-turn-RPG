@@ -10,19 +10,41 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7e2c6987fbe4c0e43b812b27cb72f337, type: 3}
-  m_Name: Attack
+  m_Name: Icicle
   m_EditorClassIdentifier: 
-  power: 8
+  power: 20
   accuracy: 1
   fixedValue: 0
   targetDead: 0
   isHeal: 0
   targetScope: 0
   factionScope: 0
-  element: {fileID: 11400000, guid: 7084ae9b250b34b45a80b4d92ea80fd9, type: 2}
+  element: {fileID: 11400000, guid: 9e1719caeae2fbb4d9da0ac5f113a5c1, type: 2}
   cost: 0
   pre_animations: []
   animations:
+  - name: icicle
+    actionType: 6
+    teleport: 0
+    start: 0
+    goal: 0
+    offset: {x: 0, y: 0}
+    animation_id: 0
+    minimumPowerRandomness: 0
+    maximumPowerRandomness: 0
+    picture: {fileID: 0}
+    animframes: {fileID: 0}
+    sound: {fileID: 0}
+    soundPitchMin: 1
+    soundPitchMax: 1
+    time: 0
+    speed: 0
+    toZoom: 0
+    initialZoom: 0
+    simulteneous: 0
+    targetPos: 0
+    startColour: {r: 0, g: 0, b: 0, a: 0}
+    endColour: {r: 0, g: 0, b: 0, a: 0}
   - name: 
     actionType: 5
     teleport: 0
@@ -35,8 +57,8 @@ MonoBehaviour:
     picture: {fileID: 0}
     animframes: {fileID: 0}
     sound: {fileID: 0}
-    soundPitchMin: 0
-    soundPitchMax: 0
+    soundPitchMin: 1
+    soundPitchMax: 1
     time: 0
     speed: 0
     toZoom: 0

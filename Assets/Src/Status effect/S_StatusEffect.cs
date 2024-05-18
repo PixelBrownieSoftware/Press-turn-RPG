@@ -57,6 +57,7 @@ public class S_StatusEffect : ScriptableObject
     public S_ElementStatusRemove[] criticalOnHit;
     //public S_ElementAffinityChange[] elementalAffinityChange;
     public Sprite statusImage;
+    public AnimationClip animation;
 
     public s_statusReplace[] statusReplace;
     public S_RPGBehaviourScript changedBehaviour;

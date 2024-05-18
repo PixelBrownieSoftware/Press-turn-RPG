@@ -12,27 +12,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e2c6987fbe4c0e43b812b27cb72f337, type: 3}
   m_Name: Tackle
   m_EditorClassIdentifier: 
+  power: 20
+  accuracy: 1
+  fixedValue: 0
+  targetDead: 0
+  isHeal: 0
+  targetScope: 0
+  factionScope: 0
+  element: {fileID: 11400000, guid: 7084ae9b250b34b45a80b4d92ea80fd9, type: 2}
+  cost: 0
+  pre_animations: []
+  animations:
+  - name: 
+    actionType: 5
+    teleport: 0
+    start: 0
+    goal: 0
+    offset: {x: 0, y: 0}
+    animation_id: 0
+    minimumPowerRandomness: 0
+    maximumPowerRandomness: 0
+    picture: {fileID: 0}
+    animframes: {fileID: 0}
+    sound: {fileID: 0}
+    soundPitchMin: 0
+    soundPitchMax: 0
+    time: 0
+    speed: 0
+    toZoom: 0
+    initialZoom: 0
+    simulteneous: 0
+    targetPos: 0
+    startColour: {r: 0, g: 0, b: 0, a: 0}
+    endColour: {r: 0, g: 0, b: 0, a: 0}
+  maxRepeat: 1
+  minRepeat: 1
+  customFunction: 
+  isPassive: 0
+  passiveSkillType: 0
+  passiveTrigger: 0
+  stat: 0
+  passiveElement: {fileID: 0}
+  percentage: 0
+  percentageHeal: 0
   statReq:
     strength: 0
     vitality: 0
     agility: 0
+    dexterity: 0
     magicPow: 0
     luck: 0
-  power: 20
-  fixedValue: 0
-  targetDead: 0
-  targetScope: 0
-  factionScope: 0
-  element: {fileID: 11400000, guid: 7084ae9b250b34b45a80b4d92ea80fd9, type: 2}
-  statRequirments:
-    strength: 0
-    vitality: 0
-    agility: 0
-    magicPow: 0
-    luck: 0
-  cost:
-    health: 4
-    maxHealth: 0
-    stamina: 0
-    maxStamina: 0
-  animations: []

@@ -10,21 +10,43 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7e2c6987fbe4c0e43b812b27cb72f337, type: 3}
-  m_Name: Ember
+  m_Name: Uzzi shot
   m_EditorClassIdentifier: 
-  power: 15
+  power: 3
   accuracy: 1
   fixedValue: 0
   targetDead: 0
   isHeal: 0
   targetScope: 0
   factionScope: 0
-  element: {fileID: 11400000, guid: 93a64569bf0e7ec44980ff27f1f7f4c3, type: 2}
-  cost: 5
-  pre_animations: []
+  element: {fileID: 11400000, guid: f37ae08668e8e7d4d96e24b09f280ead, type: 2}
+  cost: 2
+  pre_animations:
+  - name: 
+    actionType: 12
+    teleport: 0
+    start: 0
+    goal: 0
+    offset: {x: 0, y: 0}
+    animation_id: 0
+    minimumPowerRandomness: 0
+    maximumPowerRandomness: 0
+    picture: {fileID: 0}
+    animframes: {fileID: 0}
+    sound: {fileID: 8300000, guid: fa797a3d2442ecb41b6f48e75a0c1586, type: 3}
+    soundPitchMin: 1
+    soundPitchMax: 1
+    time: 0.1
+    speed: 0
+    toZoom: 0
+    initialZoom: 0
+    simulteneous: 0
+    targetPos: 0
+    startColour: {r: 0, g: 0, b: 0, a: 0}
+    endColour: {r: 0, g: 0, b: 0, a: 0}
   animations:
-  - name: ember
-    actionType: 6
+  - name: 
+    actionType: 0
     teleport: 0
     start: 0
     goal: 0
@@ -35,9 +57,9 @@ MonoBehaviour:
     picture: {fileID: 0}
     animframes: {fileID: 0}
     sound: {fileID: 0}
-    soundPitchMin: 0
-    soundPitchMax: 0
-    time: 0
+    soundPitchMin: 1
+    soundPitchMax: 1
+    time: 0.07
     speed: 0
     toZoom: 0
     initialZoom: 0
@@ -57,8 +79,8 @@ MonoBehaviour:
     picture: {fileID: 0}
     animframes: {fileID: 0}
     sound: {fileID: 0}
-    soundPitchMin: 0
-    soundPitchMax: 0
+    soundPitchMin: 1
+    soundPitchMax: 1
     time: 0
     speed: 0
     toZoom: 0
@@ -67,8 +89,8 @@ MonoBehaviour:
     targetPos: 0
     startColour: {r: 0, g: 0, b: 0, a: 0}
     endColour: {r: 0, g: 0, b: 0, a: 0}
-  maxRepeat: 1
-  minRepeat: 1
+  maxRepeat: 6
+  minRepeat: 4
   customFunction: 
   isPassive: 0
   passiveSkillType: 0

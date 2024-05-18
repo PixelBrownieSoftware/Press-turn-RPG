@@ -429,7 +429,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 1731791473339166732}
   image: {fileID: 4401378472364025081}
-  clickedSound: {fileID: 0}
+  clickedSound: {fileID: 11400000, guid: bdec62f5277309d43b6e1943b83bf851, type: 2}
   soundPlayer: {fileID: 11400000, guid: 610b8e35c092fe64e989e32dd6e318fc, type: 2}
   target:
     name: 

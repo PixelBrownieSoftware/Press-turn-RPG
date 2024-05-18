@@ -12,13 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e2c6987fbe4c0e43b812b27cb72f337, type: 3}
   m_Name: Heal
   m_EditorClassIdentifier: 
-  statReq:
-    strength: 0
-    vitality: 0
-    agility: 0
-    dexterity: 0
-    magicPow: 0
-    luck: 0
   power: 5
   accuracy: 1
   fixedValue: 0
@@ -27,12 +20,45 @@ MonoBehaviour:
   targetScope: 0
   factionScope: 1
   element: {fileID: 11400000, guid: 5482478a407c6b94fb62ca5d9a57291b, type: 2}
-  statRequirments:
+  cost: 0
+  pre_animations: []
+  animations:
+  - name: 
+    actionType: 5
+    teleport: 0
+    start: 0
+    goal: 0
+    offset: {x: 0, y: 0}
+    animation_id: 0
+    minimumPowerRandomness: 0
+    maximumPowerRandomness: 0
+    picture: {fileID: 0}
+    animframes: {fileID: 0}
+    sound: {fileID: 0}
+    soundPitchMin: 0
+    soundPitchMax: 0
+    time: 0
+    speed: 0
+    toZoom: 0
+    initialZoom: 0
+    simulteneous: 0
+    targetPos: 0
+    startColour: {r: 0, g: 0, b: 0, a: 0}
+    endColour: {r: 0, g: 0, b: 0, a: 0}
+  maxRepeat: 1
+  minRepeat: 1
+  customFunction: 
+  isPassive: 0
+  passiveSkillType: 0
+  passiveTrigger: 0
+  stat: 0
+  passiveElement: {fileID: 0}
+  percentage: 0
+  percentageHeal: 0
+  statReq:
     strength: 0
     vitality: 0
     agility: 0
     dexterity: 0
     magicPow: 0
     luck: 0
-  cost: 0
-  animations: []

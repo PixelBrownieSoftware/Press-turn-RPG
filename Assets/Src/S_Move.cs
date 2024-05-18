@@ -16,7 +16,9 @@ public class S_Move : ScriptableObject
     public FACTION_SCOPE factionScope = FACTION_SCOPE.FOES;
     public S_Element element;
     public int cost;
-    public S_ActionAnim[] animations;
+    public S_ActionAnim[] pre_animations;
+    public S_ActionAnim[] animations = new S_ActionAnim[1] { new S_ActionAnim() };   //These are the things that will repeat
+    public int maxRepeat = 1, minRepeat = 1;
     public string customFunction;
 
     public enum PASSIVE_TYPE
@@ -81,6 +83,9 @@ public class S_Move : ScriptableObject
 [System.Serializable]
 public class S_ActionAnim
 {
+    public S_ActionAnim() {
+        actionType = ACTION_TYPE.CALCULATION;
+    }
     public string name;
     public enum ACTION_TYPE
     {
@@ -95,7 +100,8 @@ public class S_ActionAnim
         MOVE_CAMERA,
         ZOOM_CAMERA,
         FADE_TARGET,
-        FADE_SCREEN
+        FADE_SCREEN,
+        PLAY_SOUND
     }
     public ACTION_TYPE actionType;
 
@@ -124,6 +130,8 @@ public class S_ActionAnim
     public int maximumPowerRandomness;
     public Sprite picture;
     public Animation animframes;
+    public AudioClip sound;
+    public float soundPitchMin = 1, soundPitchMax = 1;
     public float time;
     public float speed;
     public float toZoom;
