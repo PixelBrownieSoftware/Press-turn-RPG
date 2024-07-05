@@ -8,11 +8,11 @@ public abstract class O_Button : MonoBehaviour
 {
     public TextMeshProUGUI text;
     public Image image;
-    private Button button;
+    protected Button button;
     public R_SoundEffect clickedSound;
     public CH_SoundPitch soundPlayer;
 
-    private void Awake()
+    protected void Awake()
     {
         button = GetComponent<Button>();
     }
@@ -33,6 +33,10 @@ public abstract class O_Button : MonoBehaviour
         button.interactable = false;
     }
 
+    public Color GetButtonColor()
+    {
+        return image.color;
+    }
     public void SetButtonColour(Color colour) { 
         image.color = colour;
     }

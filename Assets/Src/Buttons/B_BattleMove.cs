@@ -2,12 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class B_BattleMove: O_Button
 {
     public S_Move move;
     public CH_Move moveClickEvent;
-    public TextMeshProUGUI tmp;
+    public S_GuiList spCost;
+    public Image elementImag;
+
+    protected new void Awake()
+    {
+        button = transform.Find("Button").GetComponent<Button>();
+    }
 
     public override void OnClickEvent()
     {
@@ -17,12 +24,14 @@ public class B_BattleMove: O_Button
     }
 
 
-    public void SetBattleButton(S_Move move, string cost) {
+    public void SetBattleButton(S_Move move, int cost) {
         this.move = move;
         if(text != null)
             text.text = "" + move.name;
-        if (tmp != null)
-            tmp.text = "" + cost;
+        if (spCost != null)
+            spCost.amount = cost;
+        elementImag.sprite = move.element.elementImage;
+        SetButtonColour(move.element.elementColour);
     }
 
 }

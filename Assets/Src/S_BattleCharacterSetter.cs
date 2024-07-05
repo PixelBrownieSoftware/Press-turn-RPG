@@ -23,6 +23,7 @@ public class S_BattleCharacterSetter : ScriptableObject
     public Color characterColour2 = new Color(1, 0.95f, 0.75f);
     public dat_affinity[] defaultAffinities;
     public S_RPGBehaviourScript characterBehaviour;
+    public RuntimeAnimatorController animationController;
 
     public Tuple<S_Element, float> FindAffinity(S_Element el) {
         foreach (var element in defaultAffinities) {

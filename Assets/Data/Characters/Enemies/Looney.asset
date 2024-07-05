@@ -50,3 +50,4 @@ MonoBehaviour:
   - element: {fileID: 11400000, guid: 93a64569bf0e7ec44980ff27f1f7f4c3, type: 2}
     affinity: 2
   characterBehaviour: {fileID: 11400000, guid: bcd22fee5a10a7c4f9d1117824b63fa0, type: 2}
+  animationController: {fileID: 9100000, guid: 7a1305bef0e32da4884a530d0d395506, type: 2}

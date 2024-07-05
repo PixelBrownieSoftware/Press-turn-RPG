@@ -1162,7 +1162,7 @@ MonoBehaviour:
   lucTxt: {fileID: 973657824603491140}
   ExpTxt: {fileID: 19892402844208793}
   characterData: {fileID: 11400000, guid: 397b7bc380c820241851d02cf72dd055, type: 2}
-  assignElementalAffinities: {fileID: 11400000, guid: 471d1938c4c29b6409ddae42a25b930e, type: 2}
+  assignElementalAffinities: {fileID: 11400000, guid: 41d36ac71a958d94891f633d49a59951, type: 2}
   health: {fileID: 19892402401005631}
   stamina: {fileID: 19892402577721028}
   nameCharacter: {fileID: 19892401444743947}
@@ -4568,7 +4568,7 @@ PrefabInstance:
     - target: {fileID: 6512046874429274656, guid: 4428ffbd46cd01e4b8220760c528b983, type: 3}
       propertyPath: el
       value: 
-      objectReference: {fileID: 11400000, guid: 2fe3dd8890252d141857cb99855889f7, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 9071007318726343846, guid: 4428ffbd46cd01e4b8220760c528b983, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -5024,7 +5024,7 @@ PrefabInstance:
     - target: {fileID: 6512046874429274656, guid: 4428ffbd46cd01e4b8220760c528b983, type: 3}
       propertyPath: el
       value: 
-      objectReference: {fileID: 11400000, guid: 34edbd49a9b03f3449ec3d76d7229759, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 9071007318726343846, guid: 4428ffbd46cd01e4b8220760c528b983, type: 3}
       propertyPath: m_Sprite
       value: 

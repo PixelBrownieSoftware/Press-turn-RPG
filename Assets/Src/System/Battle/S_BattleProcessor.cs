@@ -98,7 +98,6 @@ public class S_BattleProcessor : MonoBehaviour
                     switch (an.actionType)
                     {
                         case S_ActionAnim.ACTION_TYPE.CHAR_ANIMATION:
-                            /*
                             user.playAnimation.Invoke(an.name);
 
                             if (an.time > 0)
@@ -111,13 +110,12 @@ public class S_BattleProcessor : MonoBehaviour
                             }
                             else
                             {
-                                while (timer < user.GetAnimHandlerState())
+                                while (timer < user.getAnimHandlerState)
                                 {
                                     timer += Time.deltaTime;
                                     yield return new WaitForSeconds(Time.deltaTime);
                                 }
                             }
-                            */
                             break;
 
                         case S_ActionAnim.ACTION_TYPE.ANIMATION:
@@ -285,12 +283,13 @@ public class S_BattleProcessor : MonoBehaviour
                     break;
             }
         }
+        if(currentCharacter != null)
+            currentCharacter.playAnimation.Invoke("idle");
         yield return new WaitForSeconds(0.1f);
     }
 
     public IEnumerator CheckForDamageStatusEffects()
     {
-        string hitObjDamageType = "";
         ///TODO: Make it so that there is a way that this regenerates/damages HP and SP
         O_BattleCharacter currentCharacter = currentCharacterRef.battleCharacter;
         yield return new WaitForSeconds(0.1f);

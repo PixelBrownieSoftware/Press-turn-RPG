@@ -6,13 +6,14 @@ using UnityEngine.UI;
 public class s_elementalWeaknessGUI : MonoBehaviour
 {
     public Image weakImg;
-    public Text weakTXT;
-    public Text weakTXTShadow;
+    public Image affinityIcon;
+    public Sprite unknown;
+    public Sprite weak;
+    public Sprite bad;
+    public Sprite normal;
     O_BattleCharacter bcD;
     public S_Element el;
 
-    public Color normal;
-    public Color weak;
     public Color voidDMG;
     public Color resist;
     public Color absorb;
@@ -67,37 +68,22 @@ public class s_elementalWeaknessGUI : MonoBehaviour
                 switch (aff)
                 {
                     case TURN_FLAG.WEAK:
-                        weakTXT.text = "Weak";
-                        weakImg.color = weak;
+                        affinityIcon.sprite = weak;
                         break;
 
                     case TURN_FLAG.NORMAL:
-                        weakTXT.text = "";
-                        weakImg.color = normal;
+                        affinityIcon.sprite = normal;
                         break;
 
-                    case TURN_FLAG.ABSORB:
-                        weakTXT.text = "Abs";   
-                        weakImg.color = absorb;
-                        break;
-
-                    case TURN_FLAG.REPEL:
-                        weakTXT.text = "Ref";
-                        weakImg.color = reflect;
-                        break;
-
-                    case TURN_FLAG.NULL:
-                        weakTXT.text = "Void";
-                        weakImg.color = voidDMG;
+                    default:
+                        affinityIcon.sprite = bad;
                         break;
                 }
             }
             else
             {
-                weakTXT.text = "???";
-                weakImg.color = normal;
+                affinityIcon.sprite = unknown;
             }
-            weakTXTShadow.text = weakTXT.text;
         }
     }
 }

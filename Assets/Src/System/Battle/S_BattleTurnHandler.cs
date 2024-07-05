@@ -14,16 +14,17 @@ public class S_BattleTurnHandler : MonoBehaviour
     public R_BattleCharacterList enemies;
     public R_BattleCharacterList players;
     public CH_Func callBattleEndState;
-    public CH_Func callRequeue;
+    public CH_Func queueCharacters;
     public CH_Func receiveTurnHandle;
     public CH_Func receiveCheckTurns;
 
-    public Image[] pressTurnIcons;
+    public Animator[] pressTurnIcons;
 
     private void Awake()
     {
-        foreach (var img in pressTurnIcons) {
-            img.gameObject.SetActive(false);
+        foreach (var img in pressTurnIcons)
+        {
+            img.Play("PTIconGone");
         }
     }
 
@@ -50,12 +51,12 @@ public class S_BattleTurnHandler : MonoBehaviour
                 Debug.Log("Normal");
                 if (turnIcons.integer > 0)
                 {
-                    pressTurnIcons[turnIcons.integer].gameObject.SetActive(false);
+                    pressTurnIcons[turnIcons.integer].Play("PTiconDisappear");
                     turnIcons.integer--;
                 }
                 else
                 {
-                    pressTurnIcons[pressedIcons.integer].gameObject.SetActive(false);
+                    pressTurnIcons[pressedIcons.integer].Play("PTiconDisappear");
                     pressedIcons.integer--;
                 }
                 break;
@@ -65,12 +66,12 @@ public class S_BattleTurnHandler : MonoBehaviour
                 if (turnIcons.integer > 0)
                 {
                     turnIcons.integer--;
-                    pressTurnIcons[pressedIcons.integer].color = Color.magenta;
+                    pressTurnIcons[turnIcons.integer].Play("PTIconBlink");
                     pressedIcons.integer++;
                 }
                 else
                 {
-                    pressTurnIcons[pressedIcons.integer].gameObject.SetActive(false);
+                    pressTurnIcons[pressedIcons.integer].Play("PTiconDisappear");
                     pressedIcons.integer--;
                 }
                 break;
@@ -81,12 +82,12 @@ public class S_BattleTurnHandler : MonoBehaviour
                 {
                     if (turnIcons.integer > 0)
                     {
-                        pressTurnIcons[turnIcons.integer].gameObject.SetActive(false);
+                        pressTurnIcons[turnIcons.integer].Play("PTiconDisappear");
                         turnIcons.integer--;
                     }
                     else
                     {
-                        pressTurnIcons[pressedIcons.integer].gameObject.SetActive(false);
+                        pressTurnIcons[pressedIcons.integer].Play("PTiconDisappear");
                         pressedIcons.integer--;
                     }
                     if (netIcons.value == 0) {
@@ -118,9 +119,13 @@ public class S_BattleTurnHandler : MonoBehaviour
                 isPlayerturn.boolean = false;
                 foreach (var enemy in enemies.battleCharList)
                 {
-                    turnIcons.integer++;
+                    if (enemy.characterHealth.health <= 0)
+                    {
+                        continue;
+                    }
                     pressTurnIcons[turnIcons.integer].gameObject.SetActive(true);
-                    pressTurnIcons[turnIcons.integer].color = Color.white;
+                    pressTurnIcons[turnIcons.integer].Play("PTiconAppear");
+                    turnIcons.integer++;
                 }
 
             }
@@ -130,12 +135,15 @@ public class S_BattleTurnHandler : MonoBehaviour
                 isPlayerturn.boolean = true;
                 foreach (var player in players.battleCharList)
                 {
-                    turnIcons.integer++;
+                    if (player.characterHealth.health <= 0) {
+                        continue;
+                    }
                     pressTurnIcons[turnIcons.integer].gameObject.SetActive(true);
-                    pressTurnIcons[turnIcons.integer].color = Color.white;
+                    pressTurnIcons[turnIcons.integer].Play("PTiconAppear");
+                    turnIcons.integer++;
                 }
             }
-            callRequeue.RaiseEvent();
+            queueCharacters.RaiseEvent();
         }
         callBattleEndState.RaiseEvent();
     }

@@ -5,6 +5,9 @@ using UnityEngine;
 public class S_BattleDamageProcessor : MonoBehaviour
 {
     public R_BattleCharacterList players;
+    public R_BattleCharacterList enemies;
+    public R_BattleCharacterList goneEnemies;
+    public R_BattleCharacterList gonePlayers;
     [SerializeField]
     private R_Move selectedMoveRef;
     [SerializeField]
@@ -129,6 +132,9 @@ public class S_BattleDamageProcessor : MonoBehaviour
             hitObjectColour.Set(Color.white);
         }
         targetCharacter.characterHealth.health -= damage;
+        if (targetCharacter.onHurt != null) {
+            targetCharacter.onHurt.Invoke();
+        }
         targetCharacter.characterHealth.health = Mathf.Clamp(targetCharacter.characterHealth.health, 0, targetCharacter.characterHealth.maxHealth);
         StartCoroutine(DamageAction(damage, targetCharacter.position, hitObjDamageType));
     }
@@ -156,7 +162,6 @@ public class S_BattleDamageProcessor : MonoBehaviour
     {
         O_BattleCharacter targetCharacter = targetProcessCharacterRef.battleCharacter;
         O_BattleCharacter currentCharacter = currentCharacterRef.battleCharacter;
-        string hitObjDamageType = "";
 
         int damage = selectedMoveRef.move.power;
         HealCharacterAmount(damage);
@@ -171,7 +176,7 @@ public class S_BattleDamageProcessor : MonoBehaviour
             int damage = S_Calculation.CalculateDamage(currentCharacter, targetCharacter, selectedMoveRef.move, modifiers, 0);
 
             targetCharacter.characterHealth.health += -damage;
-            S_Element.S_StatusInflict[] inflictStatus = selectedMoveRef.move.element.statusInflict;
+            S_StatusInflict[] inflictStatus = selectedMoveRef.move.element.statusInflict;
             if (inflictStatus != null)
             {
                 foreach (var statusInflict in inflictStatus)
@@ -211,9 +216,25 @@ public class S_BattleDamageProcessor : MonoBehaviour
 
     private IEnumerator DamageAction(int damage, Vector2 position, string hitObjDamageType)
     {
-
+        O_BattleCharacter targetCharacter = targetProcessCharacterRef.battleCharacter;
         yield return new WaitForSeconds(0.1f);
         yield return StartCoroutine(SpawnHitObject(damage, position, hitObjDamageType));
+        if (targetCharacter != null)
+        {
+            if (targetCharacter.onDefeat != null)
+            {
+                targetCharacter.onDefeat.Invoke();
+            }
+            if (!targetCharacter.revivable && targetCharacter.characterHealth.health <= 0) {
+                if (players.Contains(targetCharacter)) {
+                    players.battleCharList.Remove(targetCharacter);
+                    gonePlayers.Add(targetCharacter);
+                } else {
+                    enemies.battleCharList.Remove(targetCharacter);
+                    goneEnemies.Add(targetCharacter);
+                }
+            }
+        }
     }
 
 }

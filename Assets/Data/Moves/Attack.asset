@@ -20,9 +20,54 @@ MonoBehaviour:
   targetScope: 0
   factionScope: 0
   element: {fileID: 11400000, guid: 7084ae9b250b34b45a80b4d92ea80fd9, type: 2}
+  statusInflict: []
   cost: 0
-  pre_animations: []
+  pre_animations:
+  - name: attack_pre
+    actionType: 7
+    teleport: 0
+    start: 0
+    goal: 0
+    offset: {x: 0, y: 0}
+    animation_id: 0
+    minimumPowerRandomness: 0
+    maximumPowerRandomness: 0
+    picture: {fileID: 0}
+    animframes: {fileID: 0}
+    sound: {fileID: 0}
+    soundPitchMin: 0
+    soundPitchMax: 0
+    time: 0
+    speed: 0
+    toZoom: 0
+    initialZoom: 0
+    simulteneous: 0
+    targetPos: 0
+    startColour: {r: 0, g: 0, b: 0, a: 0}
+    endColour: {r: 0, g: 0, b: 0, a: 0}
   animations:
+  - name: attack
+    actionType: 7
+    teleport: 0
+    start: 0
+    goal: 0
+    offset: {x: 0, y: 0}
+    animation_id: 0
+    minimumPowerRandomness: 0
+    maximumPowerRandomness: 0
+    picture: {fileID: 0}
+    animframes: {fileID: 0}
+    sound: {fileID: 0}
+    soundPitchMin: 0
+    soundPitchMax: 0
+    time: 0
+    speed: 0
+    toZoom: 0
+    initialZoom: 0
+    simulteneous: 0
+    targetPos: 0
+    startColour: {r: 0, g: 0, b: 0, a: 0}
+    endColour: {r: 0, g: 0, b: 0, a: 0}
   - name: 
     actionType: 5
     teleport: 0

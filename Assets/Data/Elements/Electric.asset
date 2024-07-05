@@ -20,4 +20,5 @@ MonoBehaviour:
     dexterity: 0
     luck: 0
   statusInflict: []
+  elementImage: {fileID: -8115037194750826008, guid: d3e9e7359b6915748ae623ff276e8a49, type: 3}
   elementColour: {r: 0.977109, g: 1, b: 0.11792451, a: 1}

@@ -123,15 +123,18 @@ public class O_BattleCharacter
         }
     }
     public S_Stats_Util characterHealth; 
-    public float experiencePoints;
+    public float experiencePoints = 0f;
     public int level;
+    public bool revivable = true;
     public List<S_Move> extraSkills = new List<S_Move>();
-    public List<S_Passive> extraPassives = new List<S_Passive>();
     public S_BattleCharacterSetter baseCharacterData;
     public Vector2 position;
     public UnityAction<string> playAnimation;
+    public float getAnimHandlerState = 0f;  //A bit of a kludge
     public List<S_StatusInstance> statusEffects = new List<S_StatusInstance>();
 
+    public UnityAction onDefeat;
+    public UnityAction onHurt;
 
     public float GetElementWeakness(S_Element element)
     {
@@ -255,8 +258,62 @@ public class O_BattleCharacter
         characterHealth.health = Mathf.Clamp(characterHealth.stamina, 0, characterHealth.maxStamina);
     }
 
-    public void ExperiencePointsCalculation(float exp) {
-    
+    public float ExperiencePointsCalculation(float remainder) {
+        //70 + 40
+        float toAdd = Mathf.Abs(experiencePoints - remainder);
+        Debug.Log("To add: " + toAdd + " Remainder: " + remainder);
+        //float neededToLevelUp = (level + 1) * Mathf.Pow((1.24f / 0.04f), 1.24f);
+        if (remainder > 100f)
+        {
+            remainder -= toAdd;
+            experiencePoints += toAdd;
+        }
+        else
+        {
+            if (experiencePoints + remainder > 100f)
+            {
+                remainder -= toAdd;
+                experiencePoints += toAdd;
+            }
+            else
+            {
+                experiencePoints += remainder;
+                remainder = 0;
+            }
+        }
+        if (experiencePoints >= 100f)
+        {
+            LevelUp();
+        }
+        return remainder;
+    }
+
+    public void LevelUp()
+    {
+        experiencePoints = 0;
+        level++;
+        int stGT = baseCharacterData.levelsStatIncrease.strength;
+        int vtGT = baseCharacterData.levelsStatIncrease.vitality;
+        int agGT = baseCharacterData.levelsStatIncrease.agility;
+        int dxGT = baseCharacterData.levelsStatIncrease.dexterity;
+        int lcGT = baseCharacterData.levelsStatIncrease.luck;
+        int mgGT = baseCharacterData.levelsStatIncrease.magicPow;
+        characterHealth.maxHealth += UnityEngine.Random.Range(
+            baseCharacterData.minHealthIncrease.health, 
+            baseCharacterData.maxHealthIncrease.health);
+        characterHealth.maxStamina += UnityEngine.Random.Range(
+            baseCharacterData.minHealthIncrease.stamina, 
+            baseCharacterData.maxHealthIncrease.stamina);
+
+        characterStats += new S_Stats
+            (
+            level % stGT == 0 ? 1 : 0,
+            level % vtGT == 0 ? 1 : 0,
+            level % agGT == 0 ? 1 : 0,
+            level % dxGT == 0 ? 1 : 0,
+            level % lcGT == 0 ? 1 : 0,
+            level % mgGT == 0 ? 1 : 0
+            );
     }
 }
 [System.Serializable]

@@ -175,7 +175,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: redler attack_0
+      name: redler_idle_1
       rect:
         serializedVersion: 2
         x: 7
@@ -217,7 +217,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redler attack_6
+      name: redler attack_14
       rect:
         serializedVersion: 2
         x: 957
@@ -238,7 +238,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redler attack_8
+      name: redler_cast_1
       rect:
         serializedVersion: 2
         x: 40
@@ -259,7 +259,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redler attack_9
+      name: redler_cast_2
       rect:
         serializedVersion: 2
         x: 66
@@ -280,7 +280,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redler attack_10
+      name: redler_cast_3
       rect:
         serializedVersion: 2
         x: 94
@@ -301,7 +301,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redler attack_11
+      name: redler_cast_4
       rect:
         serializedVersion: 2
         x: 124
@@ -322,28 +322,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redler attack_12
-      rect:
-        serializedVersion: 2
-        x: 230
-        y: 86
-        width: 28
-        height: 26
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 83305410000000000800000000000000
-      internalID: 21300024
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: redler attack_13
+      name: redler attack_2
       rect:
         serializedVersion: 2
         x: 245
@@ -364,7 +343,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redler attack_14
+      name: redler attack_3
       rect:
         serializedVersion: 2
         x: 310
@@ -385,7 +364,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redler attack_15
+      name: redler attack_13
       rect:
         serializedVersion: 2
         x: 898
@@ -406,7 +385,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redler attack_16
+      name: redler attack_4
       rect:
         serializedVersion: 2
         x: 367
@@ -427,7 +406,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redler attack_17
+      name: redler attack_11
       rect:
         serializedVersion: 2
         x: 777
@@ -448,7 +427,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redler attack_18
+      name: redler attack_5
       rect:
         serializedVersion: 2
         x: 425
@@ -469,7 +448,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redler attack_19
+      name: redler attack_12
       rect:
         serializedVersion: 2
         x: 836
@@ -490,7 +469,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redler attack_20
+      name: redler attack_6
       rect:
         serializedVersion: 2
         x: 477
@@ -511,7 +490,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redler attack_21
+      name: redler attack_7
       rect:
         serializedVersion: 2
         x: 541
@@ -532,7 +511,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redler attack_22
+      name: redler attack_8
       rect:
         serializedVersion: 2
         x: 599
@@ -553,7 +532,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redler attack_23
+      name: redler attack_9
       rect:
         serializedVersion: 2
         x: 659
@@ -574,7 +553,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redler attack_24
+      name: redler attack_10
       rect:
         serializedVersion: 2
         x: 716
@@ -616,7 +595,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redler attack_2
+      name: redler_idle_2
       rect:
         serializedVersion: 2
         x: 46
@@ -637,7 +616,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: redler attack_3
+      name: redler_idle_3
       rect:
         serializedVersion: 2
         x: 11
@@ -660,7 +639,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: f3ee0a20f8d3fd54180ec7f11252cfb8
     internalID: 0
     vertices: []
     indices: 
@@ -668,29 +647,28 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      redler attack_0: 21300000
       redler attack_1: 21300002
-      redler attack_10: 21300020
-      redler attack_11: 21300022
-      redler attack_12: 21300024
-      redler attack_13: 21300026
-      redler attack_14: 21300028
-      redler attack_15: 21300030
-      redler attack_16: 21300032
-      redler attack_17: 21300034
-      redler attack_18: 21300036
-      redler attack_19: 21300038
-      redler attack_2: 21300004
-      redler attack_20: 21300040
-      redler attack_21: 21300042
-      redler attack_22: 21300044
-      redler attack_23: 21300046
-      redler attack_24: 21300048
+      redler attack_10: 21300048
+      redler attack_11: 21300034
+      redler attack_12: 21300038
+      redler attack_13: 21300030
+      redler attack_14: 21300012
+      redler attack_2: 21300026
       redler attack_25: 21300050
-      redler attack_3: 21300006
-      redler attack_6: 21300012
-      redler attack_8: 21300016
-      redler attack_9: 21300018
+      redler attack_3: 21300028
+      redler attack_4: 21300032
+      redler attack_5: 21300036
+      redler attack_6: 21300040
+      redler attack_7: 21300042
+      redler attack_8: 21300044
+      redler attack_9: 21300046
+      redler_cast_1: 21300016
+      redler_cast_2: 21300018
+      redler_cast_3: 21300020
+      redler_cast_4: 21300022
+      redler_idle_1: 21300000
+      redler_idle_2: 21300004
+      redler_idle_3: 21300006
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

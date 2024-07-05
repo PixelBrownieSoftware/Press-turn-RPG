@@ -46,5 +46,10 @@ MonoBehaviour:
   passivesToLearn: []
   characterColour: {r: 0.990566, g: 0.25441486, b: 0.2009167, a: 1}
   characterColour2: {r: 0.8113208, g: 0.10829957, b: 0, a: 1}
-  defaultAffinities: []
+  defaultAffinities:
+  - element: {fileID: 11400000, guid: 93a64569bf0e7ec44980ff27f1f7f4c3, type: 2}
+    affinity: 0
+  - element: {fileID: 11400000, guid: 9e1719caeae2fbb4d9da0ac5f113a5c1, type: 2}
+    affinity: 2
   characterBehaviour: {fileID: 0}
+  animationController: {fileID: 9100000, guid: 909ece5d94373a24d8150e1da97a6422, type: 2}

@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 547025608980511146}
   - component: {fileID: 8045326342777993659}
+  - component: {fileID: 7093555801771485069}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -84,6 +85,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &7093555801771485069
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1547857726816562277}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6694334397875651498
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,26 +151,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 778001f892299c74e84ebb3109f44940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  battleCharacter:
-    name: 
-    characterStats:
-      strength: 0
-      vitality: 0
-      agility: 0
-      magicPow: 0
-      luck: 0
-    statusStats:
-      strength: 0
-      vitality: 0
-      agility: 0
-      magicPow: 0
-      luck: 0
-    characterHealth:
-      health: 0
-      maxHealth: 0
-      stamina: 0
-      maxStamina: 0
-    experiencePoints: 0
-    level: 0
-    extraSkills: []
-    baseCharacterData: {fileID: 0}
+  render: {fileID: 8045326342777993659}
+  animator: {fileID: 7093555801771485069}

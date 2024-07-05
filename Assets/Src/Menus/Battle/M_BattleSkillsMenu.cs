@@ -98,14 +98,14 @@ public class M_BattleSkillsMenu : S_MenuSystem
                 {
                     button.SetButtonColour(Color.grey);
                     button.SetButonTextColour(Color.grey);
-                    button.SetBattleButton(moves[i], strCost);
+                    button.SetBattleButton(moves[i], cost);
                     button.move = null;
                 }
                 else
                 {
                     button.SetButtonColour(Color.white);
                     button.SetButonTextColour(Color.white);
-                    button.SetBattleButton(moves[i], strCost);
+                    button.SetBattleButton(moves[i], cost);
                 }
                 button.gameObject.SetActive(true);
             }

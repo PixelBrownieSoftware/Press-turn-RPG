@@ -12,12 +12,6 @@ public class M_CharacterStatus : S_MenuSystem
     public S_GuiList luc;
     public S_GuiList mag;
 
-    public Text strTXT;
-    public Text dxTXT;
-    public Text vitTXT;
-    public Text agiTXT;
-    public Text magTxt;
-    public Text lucTxt;
     public Text ExpTxt;
 
     O_BattleCharacter currentBattleCharacterData;
@@ -33,7 +27,7 @@ public class M_CharacterStatus : S_MenuSystem
     {
         base.StartMenu();
         currentBattleCharacterData = characterData.battleCharacter;
-        //assignElementalAffinities.RaiseEvent();
+        assignElementalAffinities.RaiseEvent();
     }
 
     private void Update()
@@ -49,13 +43,9 @@ public class M_CharacterStatus : S_MenuSystem
                 agi.amount = currentBattleCharacterData.characterStats.agility;
                 vit.amount = currentBattleCharacterData.characterStats.vitality;
                 luc.amount = currentBattleCharacterData.characterStats.luck;
+                dx.amount = currentBattleCharacterData.characterStats.dexterity;
                 mag.amount = currentBattleCharacterData.characterStats.magicPow;
 
-                strTXT.text = "" + currentBattleCharacterData.characterStats.strength;
-                vitTXT.text = "" + currentBattleCharacterData.characterStats.vitality;
-                agiTXT.text = "" + currentBattleCharacterData.characterStats.agility;
-                magTxt.text = "" + currentBattleCharacterData.characterStats.magicPow;
-                lucTxt.text = "" + currentBattleCharacterData.characterStats.luck;
                 if (ExpTxt != null)
                     ExpTxt.text = currentBattleCharacterData.experiencePoints + "%";
                 /*

@@ -26,14 +26,9 @@ public class M_ExtraSkills : M_AbilityMenu
     [SerializeField]
     private R_BattleCharacter currentCharacter;
     [SerializeField]
-    private B_Int[] equipButtons;
+    private B_SkillSelect[] equipButtons;
     [SerializeField]
-    private B_Int[] availibleButtons;
-
-    [SerializeField]
-    private CH_Int equip;
-    [SerializeField]
-    private CH_Int deEquip;
+    private B_SkillSelect[] availibleButtons;
 
     [SerializeField]
     private CH_Int equipSelect;
@@ -59,6 +54,9 @@ public class M_ExtraSkills : M_AbilityMenu
     public R_SoundEffect unEquipSound;
     public R_SoundEffect selectSound;
 
+    [SerializeField]
+    float colourDivider = 0.2f;
+
     public override void StartMenu()
     {
         page = 0;
@@ -66,7 +64,7 @@ public class M_ExtraSkills : M_AbilityMenu
         availibleSkills.Clear(); //currentCharacter.battleCharacter.getCurrentExtraMoves;
         availibleSkills.AddRange(extraSkills.moveListRef);
         UpdateHasMovesList();
-        UpdateButtons2();
+        UpdateButtons();
         unequipButton.gameObject.SetActive(false);
         equipButton.gameObject.SetActive(false);
     }
@@ -88,13 +86,13 @@ public class M_ExtraSkills : M_AbilityMenu
         if (i == 1) {
             if (availibleButtons.Length * (page + 1) < availibleSkills.Count) {
                 page++;
-                UpdateButtons2();
+                UpdateButtons();
             }
         }
         if (i == -1) {
             if (page > 0) {
                 page--;
-                UpdateButtons2();
+                UpdateButtons();
             }
         }
     }
@@ -119,7 +117,7 @@ public class M_ExtraSkills : M_AbilityMenu
         charactersHaveMove.Remove(selectedMove);
         UpdateHasMovesList();
         selectedMove = null;
-        UpdateButtons2();
+        UpdateButtons();
     }
     private void AddSkill(S_Move skill)
     {
@@ -129,7 +127,7 @@ public class M_ExtraSkills : M_AbilityMenu
         currentCharacter.battleCharacter.extraSkills.Add(skill);
         UpdateHasMovesList();
         selectedMove = null;
-        UpdateButtons2();
+        UpdateButtons();
     }
 
     public void GetAvailibleSkill(int i)
@@ -140,10 +138,10 @@ public class M_ExtraSkills : M_AbilityMenu
             moveDescription.text = "" + availibleSkills[i].name;
             unequipButton.gameObject.SetActive(true);
             equipButton.gameObject.SetActive(false);
-            UpdateButtons2();
+            UpdateButtons();
             UpdateHasMovesList();
             soundPlay.RaiseEvent(selectSound);
-            SetButton(ref availibleButtons[i], Color.yellow);
+            SetButton(ref availibleButtons[i], Color.yellow * colourDivider);
             moveDescription.text = DisplayAbility(selectedMove, currentCharacter.battleCharacter);
             unequipButton.SetIntButton(i);
         }
@@ -170,10 +168,11 @@ public class M_ExtraSkills : M_AbilityMenu
             moveDescription.text = "" + selectedMove.name;
             unequipButton.gameObject.SetActive(true);
             equipButton.gameObject.SetActive(false);
-            UpdateButtons2();
+            UpdateButtons();
             UpdateHasMovesList();
             soundPlay.RaiseEvent(selectSound);
-            SetButton(ref equipButtons[i], Color.yellow);
+            Color buttonColour = equipButtons[i].GetButtonColor();
+            SetButton(ref equipButtons[i], Color.yellow * colourDivider);
             moveDescription.text = DisplayAbility(selectedMove, currentCharacter.battleCharacter);
         }
         else
@@ -187,7 +186,7 @@ public class M_ExtraSkills : M_AbilityMenu
         }
     }
 
-    public void UpdateButtons2() {
+    public void UpdateButtons() {
         int indButton = 0;
         for (int i = 0; i < availibleButtons.Length; i++) {
             int index = i + (availibleButtons.Length * page);
@@ -201,32 +200,33 @@ public class M_ExtraSkills : M_AbilityMenu
                 {
                     availibleButtons[indButton].EnableInteractable();
                     S_Move skill = availibleSkills[index];
-                    Color buttonColour = Color.white;
+                    availibleButtons[indButton].SetElement(skill.element);
+                    Color buttonColour = availibleButtons[indButton].GetButtonColor();
                     if (extraSkillsMax.integer == currentCharacter.battleCharacter.extraSkills.Count)
-                        buttonColour = Color.grey;
+                        buttonColour += Color.clear * colourDivider;
                     else if (extraSkillsMax.integer > availibleSkills.Count)
                     {
                         if (skill.MeetsRequirements(currentCharacter.battleCharacter))
-                            buttonColour = Color.white;
+                            buttonColour += Color.white * colourDivider;
                         else
-                            buttonColour = Color.red;
+                            buttonColour += Color.red * colourDivider;
                     }
                     if (charactersHaveMove.Contains(skill))
                     {
                         if (currentCharacter.battleCharacter.extraSkills.Contains(skill))
                         {
-                            buttonColour = Color.green;
+                            buttonColour += Color.green * colourDivider;
                         }
                         else
                         {
-                            buttonColour = Color.blue;
+                            buttonColour = Color.blue * colourDivider;
                             availibleButtons[indButton].DisableInteractable();
                         }
                     }
                     else {
                         if (currentCharacter.battleCharacter.getCurrentDefaultMoves.Contains(skill))
                         {
-                            buttonColour = Color.magenta;
+                            buttonColour = Color.magenta * colourDivider;
                             availibleButtons[indButton].DisableInteractable();
                         }
                     }
@@ -252,7 +252,9 @@ public class M_ExtraSkills : M_AbilityMenu
                 equipButtons[indButton].SetIntButton(i);
                 equipButtons[indButton].SetButonText(skill.name);
                 */
-                SetButton(ref equipButtons[indButton], skill, i, Color.white);
+                equipButtons[indButton].SetElement(skill.element);
+                Color buttonColour = equipButtons[indButton].GetButtonColor();
+                SetButton(ref equipButtons[indButton], skill, i, buttonColour);
                 indButton++;
             }
             else

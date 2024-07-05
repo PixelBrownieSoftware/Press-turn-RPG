@@ -17,4 +17,8 @@ MonoBehaviour:
     vitality: 0
     agility: 0
     magicPow: 0
+    dexterity: 0
     luck: 0
+  statusInflict: []
+  elementImage: {fileID: 3120384529538254799, guid: d3e9e7359b6915748ae623ff276e8a49, type: 3}
+  elementColour: {r: 1, g: 1, b: 1, a: 1}

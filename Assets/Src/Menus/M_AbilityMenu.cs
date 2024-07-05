@@ -8,19 +8,20 @@ public class M_AbilityMenu : S_MenuSystem
 {
     protected int page = 0;
 
-    public void SetButton(ref B_Int button, Color colour)
+    public void SetButton(ref B_SkillSelect button, Color colour)
     {
         button.gameObject.SetActive(true);
         button.SetButtonColour(colour);
     }
-    public void SetButton(ref B_Int button, S_Move skill, int index, Color colour)
+    public void SetButton(ref B_SkillSelect button, S_Move skill, int index, Color colour)
     {
         button.gameObject.SetActive(true);
         button.SetIntButton(index);
+        button.cost.amount = skill.cost;
         button.SetButonText(skill.name);
         button.SetButtonColour(colour);
     }
-    public void SetButton(ref B_Int button, S_Move skill, int index)
+    public void SetButton(ref B_SkillSelect button, S_Move skill, int index)
     {
         SetButton(ref button, skill, index, Color.white);
     }
@@ -44,6 +45,64 @@ public class M_AbilityMenu : S_MenuSystem
         string agilityReq = "";
         string luckReq = "";
         string magpowReq = "";
+
+        string scope = "";
+        string inflict = "";
+        string isHealDesc = "";
+        string accuracy = "Accuracy: " + (ability.accuracy * 100f) + "%";
+        string power = "Power: " + ability.power;
+        if (ability.isPassive)
+        {
+            isHealDesc = "";
+        } else
+        {
+            if (ability.isHeal)
+            {
+                isHealDesc = "healing";
+            }
+            else
+            {
+                isHealDesc = "damage";
+            }
+            switch (ability.targetScope)
+            {
+                case S_Move.TARGET_SCOPE.AOE:
+                    scope += "Area of effect " + isHealDesc + " on";
+                    break;
+                case S_Move.TARGET_SCOPE.SINGLE:
+                    scope += "Single target " + isHealDesc + " on";
+                    break;
+                case S_Move.TARGET_SCOPE.ALL:
+                    scope += "All " + isHealDesc + " on";
+                    break;
+            }
+            switch (ability.factionScope)
+            {
+                case S_Move.FACTION_SCOPE.FOES:
+                    scope += " enemies.";
+                    break;
+                case S_Move.FACTION_SCOPE.ALLY:
+                    scope += " allies.";
+                    break;
+                case S_Move.FACTION_SCOPE.ALL:
+                    scope += " all.";
+                    break;
+            }
+        }
+        if (ability.statusInflict != null) {
+            if (ability.statusInflict.Length > 0) {
+                foreach (var status in ability.statusInflict) {
+                    string statusDesc = "";
+                    if (status.chance < 1f)
+                    {
+                        statusDesc += (status.chance * 100f) + "%" + " chance of ";
+                    }
+                    statusDesc += status.add_remove ? "inflicting " : "removing ";
+                    statusDesc += status.statusEffect.name;
+                    inflict += statusDesc + "\n";
+                }
+            }
+        }
 
         if (strReqFufil)
         {
@@ -76,7 +135,12 @@ public class M_AbilityMenu : S_MenuSystem
         else
             magpowReq = "<color=red>" + skillStatRequire.magicPow + "</color>";
 
-        return "" + extraSkill.name + "\n" +
+        return "" + extraSkill.name + "\n" + "\n" +
+            power + "\n" + "\n" +
+            scope + "\n" +
+            inflict + "\n" +
+            accuracy + "\n" + "\n" +
+            "Cost: " + extraSkill.cost + " SP\n" + "\n" +
             "Strength: " + strengthReq + "\n" +
             "Vitality: " + vitalityReq + "\n" +
             "Luck: " + luckReq + "\n" +

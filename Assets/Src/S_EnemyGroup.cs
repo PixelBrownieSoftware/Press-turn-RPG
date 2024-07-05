@@ -44,7 +44,7 @@ public class S_BattleGroup : ScriptableObject
         public int maxLevel;
         public S_Move[] extraSkills;
         public S_Passive[] extraPassives;
-        //public charAI[] extraSkillsAI;
+        public bool revivable = false;
     }
     public bool fleeable = true;
     public bool tempOnly = false;

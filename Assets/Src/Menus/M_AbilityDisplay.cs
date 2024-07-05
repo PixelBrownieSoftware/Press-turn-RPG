@@ -9,7 +9,7 @@ public class M_AbilityDisplay : M_AbilityMenu
     [SerializeField]
     private R_BattleCharacter selectedCharacter;
     [SerializeField]
-    private B_Int[] displayButtons;
+    private B_SkillSelect[] displayButtons;
     [SerializeField]
     private List<S_Move> displayAbility = new List<S_Move>();
     [SerializeField]
@@ -49,7 +49,8 @@ public class M_AbilityDisplay : M_AbilityMenu
                 if (displayAbility.Count > index)
                 {
                     S_Move skill = displayAbility[index];
-                    Color buttonColour = Color.white;
+                    displayButtons[indButton].SetElement(skill.element);
+                    Color buttonColour = displayButtons[indButton].GetButtonColor();
                     SetButton(ref displayButtons[indButton], skill, index, buttonColour);
                     indButton++;
                 }

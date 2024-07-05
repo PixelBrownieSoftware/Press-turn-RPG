@@ -15,6 +15,7 @@ public class S_Move : ScriptableObject
     public TARGET_SCOPE targetScope = TARGET_SCOPE.SINGLE;
     public FACTION_SCOPE factionScope = FACTION_SCOPE.FOES;
     public S_Element element;
+    public S_StatusInflict[] statusInflict;
     public int cost;
     public S_ActionAnim[] pre_animations;
     public S_ActionAnim[] animations = new S_ActionAnim[1] { new S_ActionAnim() };   //These are the things that will repeat
